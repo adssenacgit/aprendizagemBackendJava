@@ -47,4 +47,7 @@ public class Encontro {
 	
 	@OneToMany(mappedBy = "encontro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<SituacaoEncontro> situacaoEncontro = new HashSet<>()
+		
+	//@OneToMany(mappedBy = "usuario")
+    //private Set<Recurso> recursos = new HashSet<>();
 }
