@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +51,10 @@ public class Encontro {
 	@OneToMany(mappedBy = "encontro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<SituacaoEncontro> situacaoEncontro = new HashSet<>()
 		
+	@OneToOne(mappedBy = "encontro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<ControleExecucao> situacaoEncontro = new HashSet<>()
+		
+	//A Notação OneToMany serve para mapear, dentro do schema de Banco dados, os relacionamentos das tabelas com as suas respectivas entidades.
 	//@OneToMany(mappedBy = "usuario")
     //private Set<Recurso> recursos = new HashSet<>();
 }
