@@ -9,9 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,9 +46,11 @@ public class Encontro {
 	@Column(name = "status", nullable = false)
 	private Long status;
 	
-	@OneToMany(mappedBy = "encontro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<Encontro> encontros = new HashSet<>();
-    
+	@ManyToOne
+   @JoinColumn(name = "encontrotipo_id", nullable = false)
+	@JsonIgnore
+	private EncontroTipo encontroTipo;
+	    
 	@OneToMany(mappedBy = "encontro", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Grupo> grupo = new HashSet<>();
 	
