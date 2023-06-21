@@ -47,7 +47,7 @@ public class Encontro {
 	private Long status;
 	
 	@ManyToOne
-   @JoinColumn(name = "encontrotipo_id", nullable = false)
+   	@JoinColumn(name = "encontrotipo_id", nullable = false)
 	@JsonIgnore
 	private EncontroTipo encontroTipo;
 	    
