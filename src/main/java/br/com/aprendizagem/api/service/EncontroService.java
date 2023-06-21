@@ -78,10 +78,5 @@ public class EncontroService {
 		encontroRepository.deleteById(id);
 		return new ResponseEntity<Encontro>(HttpStatus.OK);
 	}
-
-	private Boolean isEncontroPresent (String id) {
-		Optional<Encontro> encontroOpt = encontroRepository.findById(id);
-		return encontroOpt.isPresent();
-	}
 	
 }
