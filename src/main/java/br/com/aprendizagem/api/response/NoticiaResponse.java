@@ -28,11 +28,11 @@ public class NoticiaResponse {
 		
 	public static NoticiaResponse of(Noticia noticia) {
 		return NoticiaResponse.builder()
-				.id(usuario.getId())
-				.cpf(usuario.getTitulo())
-				.nomeCompleto(usuario.getDescricao())
-				.apelido(usuario.getAutor())
-				.email(usuario.getDataPublicacao())
+				.id(noticia.getId())
+				.titulo(noticia.getTitulo())
+				.descricao(noticia.getDescricao())
+				.autor(noticia.getAutor())
+				.dataPublicacao(noticia.getDataPublicacao())
 				}
 
 	public static List<NoticiaResponse> of(List<Noticia> noticias) {
@@ -50,9 +50,9 @@ public class NoticiaResponse {
 			noticiaResponses.add(of(noticia));
 		}
 		return new PageImpl<NoticiaResponse>(
-					usuarioResponses, 
-					usuarios.getPageable(),
-					usuarios.getTotalElements()
+					noticiaResponses, 
+					noticias.getPageable(),
+					noticias.getTotalElements()
 				);
 	}
 	
