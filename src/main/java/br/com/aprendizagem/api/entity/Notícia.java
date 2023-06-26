@@ -32,8 +32,8 @@ public class Noticia {
 	private String Titulo;	
 	@Column(name = "noticia_descricao", nullable = false)
 	private String Descricao;
-	@Column(name = "noticia_data", nullable = false)
-	private LocalDateTime data;
+	@Column(name = "noticia_dataPulicacao", nullable = false)
+	private LocalDateTime dataPublicacao;
 	@Column(name = "noticia_autor", nullable = false)
 	private String autor;	
 
