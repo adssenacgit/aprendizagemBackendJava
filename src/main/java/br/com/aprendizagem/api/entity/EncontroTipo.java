@@ -18,12 +18,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Usuario {
+public class EncontroTipo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@Column(name = "encontroTipo_id", nullable = false)
 	private String id;
-	@Column(name = "encontrotipo_descricao", nullable = false)
+	@Column(name = "encontroTipo_descricao", nullable = false)
 	private String descricao;
-	@Column(name = "encontrotipo_status", nullable = false)
+	@Column(name = "encontrotTipo_status", nullable = false)
+
+			
+	@OneToMany(mappedBy = "EncontroTipo")
+  	  private Set<Encontro> encontros;
+
+}
 
