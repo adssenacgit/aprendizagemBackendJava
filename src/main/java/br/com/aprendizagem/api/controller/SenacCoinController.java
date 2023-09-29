@@ -22,10 +22,12 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@RequestMapping("senaccoin")
+@RequestMapping(value = "senaccoin", produces = APPLICATION_JSON_VALUE)
 public class SenacCoinController {
 	@Autowired
 	private SenacCoinService scService;

@@ -50,6 +50,6 @@ public class Oferta {
 	@JsonIgnore
 	private Curso curso;	
 	
-	@OneToMany(mappedBy = "oferta")
-    private Set<Modulo> modulo;
+//	@OneToMany(mappedBy = "oferta")
+//    private Set<Modulo> modulo;
 }
