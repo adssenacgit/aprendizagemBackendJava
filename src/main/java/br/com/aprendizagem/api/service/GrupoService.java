@@ -55,7 +55,7 @@ public class GrupoService {
     }
 
     public List<Grupo> filterActive(List<Grupo> grupos) {
-        return grupos.stream().filter(g -> g.getStatus() == 1).collect(Collectors.toList());
+        return grupos.stream().filter(g -> g.getPeriodo().getStatus() == 1).collect(Collectors.toList());
     }
 }
 
