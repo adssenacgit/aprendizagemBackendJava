@@ -14,4 +14,5 @@ public interface GrupoRepository extends JpaRepository<Grupo, Long> {
     @Query("SELECT g FROM Grupo g JOIN g.estudantes s WHERE s.id = :estudanteId AND g.periodo.status = 1")
     List<Grupo> getGruposByPeriodoAtivoEstudanteId(@Param("estudanteId") Long estudanteId);
 
+    List<Grupo> getGruposByProfessorId(Long professorId);
 }

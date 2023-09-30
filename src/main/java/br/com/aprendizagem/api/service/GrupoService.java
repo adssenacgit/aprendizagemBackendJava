@@ -1,7 +1,6 @@
 package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Grupo;
-import br.com.aprendizagem.api.entity.Participante;
 import br.com.aprendizagem.api.repository.GrupoRepository;
 import br.com.aprendizagem.api.repository.ParticipanteRepository;
 import br.com.aprendizagem.api.response.GrupoResponse;
@@ -48,7 +47,15 @@ public class GrupoService {
     @Transactional
     public List<Grupo> getGruposByPeriodoAtivoByEstudanteId(Long estudanteId) {
         return grupoRepository.getGruposByPeriodoAtivoEstudanteId(estudanteId);
+    }
 
+    @Transactional
+    public List<Grupo> getGruposByPeriodoAtivoByProfessorId(Long professorId) {
+        return filterActive(grupoRepository.getGruposByProfessorId(professorId));
+    }
+
+    public List<Grupo> filterActive(List<Grupo> grupos) {
+        return grupos.stream().filter(g -> g.getStatus() == 1).collect(Collectors.toList());
     }
 }
 

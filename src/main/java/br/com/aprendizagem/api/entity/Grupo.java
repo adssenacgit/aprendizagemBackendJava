@@ -38,8 +38,9 @@ public class Grupo {
     @ManyToOne
     @JoinColumn(name = "periodo_id")
     private Periodo periodo;
-    @Column(name = "professor_id")
-    private Long professorId;
+    @ManyToOne
+    @JoinColumn (name = "professor_id")
+    private Professor professor;
 
     @ManyToMany(mappedBy = "grupos")
     private List<Estudante> estudantes;

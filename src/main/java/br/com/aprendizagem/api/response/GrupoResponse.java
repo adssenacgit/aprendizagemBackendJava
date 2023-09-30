@@ -35,7 +35,7 @@ public class GrupoResponse {
                 .turnoId(grupo.getTurnoId())
                 .unidadeCurricular(grupo.getUnidadeCurricular())
                 .periodoId(grupo.getPeriodo().getId())
-                .professorId(grupo.getProfessorId())
+                .professorId(grupo.getProfessor().getId())
                 .build();
     }
 
