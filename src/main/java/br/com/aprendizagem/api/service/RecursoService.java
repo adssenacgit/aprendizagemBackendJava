@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,4 +28,12 @@ public class RecursoService {
     public Recurso getRecursoById(Long id) {
         return recursoRepository.findById(id).orElse(null);
     }
+
+    @Transactional
+    public ResponseEntity<List<RecursoResponse>> getActiveRecursos() {
+        List<Recurso> recursos = recursoRepository.getActiveRecursos();
+        if( recursos.isEmpty()){
+            ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(RecursoResponse.of(recursos));}
 }

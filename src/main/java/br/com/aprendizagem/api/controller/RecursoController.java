@@ -25,6 +25,8 @@ public class RecursoController {
     private final RecursoService recursoService;
 
     @GetMapping
+    public ResponseEntity<List<RecursoResponse>> getAllActiveRecursos() { return recursoService.getActiveRecursos();}
+    @GetMapping(value = "all")
     public ResponseEntity<List<RecursoResponse>> getAllRecursos(){
         return recursoService.getAllRecursos();
     }
