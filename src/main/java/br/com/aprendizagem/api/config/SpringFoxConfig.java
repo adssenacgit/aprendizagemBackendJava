@@ -38,11 +38,11 @@ public class SpringFoxConfig {
 	
 	private ApiInfo apiInfo() {
 	    return new ApiInfo(
-	      "Minha REST API",
-	      "Some custom description of API.",
+	      "aprendizagemBackendJava",
+	      "API do Projeto Integrador Aprendizagem do SENAC - RJ",
 	      "1.0",
 	      "LinkTermosDeServico",
-	      new Contact("Marcelo Estruc", "www.empresa.com", "marceloestruc@empresa.com"),
+	      new Contact("SenacRJ", "www.senac.br", "johnny.tafur@rj.senac.br"),
 	      "License of API",
 	      "API license URL",
 	      Collections.emptyList());
