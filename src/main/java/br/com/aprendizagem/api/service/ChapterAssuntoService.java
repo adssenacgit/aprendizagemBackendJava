@@ -15,7 +15,7 @@ public class ChapterAssuntoService {
     private final ChapterAssuntoRepository chapterAssuntoRepository;
     @Transactional
     public ResponseEntity<List<ChapterAssunto>> getAllChapterAssunto(){
-        List<ChapterAssunto> assuntos = chapterAssuntoRepository.findAll();
+        List<ChapterAssunto> assuntos = chapterAssuntoRepository.getAllChapterAssunto();
         if(assuntos.isEmpty()){
             return ResponseEntity.notFound().build();
         }

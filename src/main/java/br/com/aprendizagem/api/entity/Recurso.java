@@ -1,7 +1,9 @@
 package br.com.aprendizagem.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,6 +25,9 @@ public class Recurso {
     @Lob
     @Column(name = "recurso_arquivo")
     private byte[] arquivo;
+
+    @Column(name = "recurso_mime_type")
+    private String mimeType;
 
     @Column(name = "recurso_data_cadastro")
     private LocalDateTime dataCadastro;

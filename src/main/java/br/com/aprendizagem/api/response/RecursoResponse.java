@@ -9,13 +9,16 @@ import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecursoResponse {
     private Long id;
     private String descricao;
     private String nomeArquivo;
+    private String mimeType;
     private LocalDateTime dataCadastro;
     private Integer status;
-    private UsuarioResponse usuario;
+    private Usuario usuario;
 
 
     public static RecursoResponse of(Recurso recurso) {
@@ -23,9 +26,10 @@ public class RecursoResponse {
                 .id(recurso.getId())
                 .descricao(recurso.getDescricao())
                 .nomeArquivo(recurso.getNomeArquivo())
+                .mimeType(recurso.getMimeType())
                 .dataCadastro(recurso.getDataCadastro())
                 .status(recurso.getStatus())
-                .usuario(UsuarioResponse.of(recurso.getUsuario()))
+                .usuario(recurso.getUsuario())
                 .build();
     }
 

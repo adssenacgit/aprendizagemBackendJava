@@ -5,15 +5,11 @@ import br.com.aprendizagem.api.response.RecursoResponse;
 import br.com.aprendizagem.api.service.RecursoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.apache.tika.Tika;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -24,12 +20,21 @@ import java.util.List;
 public class RecursoController {
     private final RecursoService recursoService;
 
+//    @GetMapping
+//    public ResponseEntity<List<RecursoResponse>> getAllActiveRecursos() { return recursoService.getActiveRecursos();}
+
     @GetMapping
-    public ResponseEntity<List<RecursoResponse>> getAllActiveRecursos() { return recursoService.getActiveRecursos();}
+    public ResponseEntity<List<RecursoResponse>> getAllActiveRecursosSemArquivos() { return recursoService.getActiveRecursosSemArquivo();}
     @GetMapping(value = "all")
     public ResponseEntity<List<RecursoResponse>> getAllRecursos(){
         return recursoService.getAllRecursos();
     }
+
+    @GetMapping(value = "filtrarRecursosByUsuarioId/{usuarioId}")
+    public ResponseEntity<List<RecursoResponse>> getAllActiveRecursosByUsuarioIdSemArquivos(@PathVariable String usuarioId) {
+        return recursoService.getActiveRecursosByUsuarioIdSemArquivo(usuarioId);
+    }
+
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Retorna apenas o arquivo no body e o MIME type no http header.")
@@ -39,7 +44,7 @@ public class RecursoController {
         if(recurso != null){
             byte[] data = recurso.getArquivo();
 
-            String mimeType = determineMimeType(data);
+            String mimeType = recurso.getMimeType();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.valueOf(mimeType));
@@ -50,10 +55,5 @@ public class RecursoController {
             return ResponseEntity.notFound().build();
         }
 
-    }
-
-    private String determineMimeType(byte[] data) {
-        Tika tika = new Tika();
-        return tika.detect(data); // Detect MIME type based on binary data
     }
 }
