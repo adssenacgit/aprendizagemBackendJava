@@ -38,10 +38,11 @@ public class Grupo {
     @ManyToOne
     @JoinColumn(name = "periodo_id")
     private Periodo periodo;
+
     @ManyToOne
     @JoinColumn (name = "professor_id")
     private Professor professor;
 
-    @ManyToMany(mappedBy = "grupos")
-    private List<Estudante> estudantes;
+//    @OneToMany(mappedBy = "grupos", fetch = FetchType.EAGER)
+//    private List<Participante> participantes;
 }

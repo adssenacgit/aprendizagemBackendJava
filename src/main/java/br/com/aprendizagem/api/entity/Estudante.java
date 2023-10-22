@@ -33,20 +33,19 @@ public class Estudante {
     @JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-//	@ManyToOne
-//    @JoinColumn(name = "oferta_id")
-//	@JsonIgnore
-//	private Oferta oferta;
+	@ManyToOne
+    @JoinColumn(name = "oferta_id")
+	private Oferta oferta;
 
 
     //@OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	//private Set<EstudanteScore> scores = new HashSet<>();
-    
-    @ManyToMany
-	@JoinTable(
-			name = "participante",
-			joinColumns = @JoinColumn(name = "estudante_id"),
-			inverseJoinColumns = @JoinColumn(name = "grupo_id")
-	)
-	private List<Grupo> grupos;
+
+//    @ManyToMany
+//	@JoinTable(
+//			name = "participante",
+//			joinColumns = @JoinColumn(name = "estudante_id"),
+//			inverseJoinColumns = @JoinColumn(name = "grupo_id")
+//	)
+//	private List<Grupo> grupos;
 }

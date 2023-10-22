@@ -41,13 +41,13 @@ public class GrupoService {
 
     @Transactional
     public List<Grupo> getGruposByEstudanteId(Long estudante_id) {
-        return grupoRepository.getGruposByEstudanteId(estudante_id);
+        return filterActive(grupoRepository.findGruposByEstudanteId(estudante_id));
     }
-
-    @Transactional
-    public List<Grupo> getGruposByPeriodoAtivoByEstudanteId(Long estudanteId) {
-        return grupoRepository.getGruposByPeriodoAtivoEstudanteId(estudanteId);
-    }
+//
+//    @Transactional
+//    public List<Grupo> getGruposByPeriodoAtivoByEstudanteId(Long estudanteId) {
+//        return grupoRepository.getGruposByPeriodoAtivoEstudanteId(estudanteId);
+//    }
 
     @Transactional
     public List<Grupo> getGruposByPeriodoAtivoByProfessorId(Long professorId) {

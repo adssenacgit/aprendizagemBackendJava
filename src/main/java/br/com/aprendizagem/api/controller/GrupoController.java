@@ -46,13 +46,13 @@ public class GrupoController {
         return ResponseEntity.ok(GrupoResponse.of(grupos));
     }
 
-    @GetMapping("/getGrupoByPeriodoAtivoByEstudanteId/{estudanteId}")
-    public ResponseEntity<List<GrupoResponse>> getGrupoByPeriodoAtivoByEstudanteId(@PathVariable Long estudanteId) {
-        List<Grupo> grupos = grupoService.getGruposByPeriodoAtivoByEstudanteId(estudanteId);
-        if(grupos.isEmpty())
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(GrupoResponse.of(grupos));
-    }
+//    @GetMapping("/getGrupoByPeriodoAtivoByEstudanteId/{estudanteId}")
+//    public ResponseEntity<List<GrupoResponse>> getGrupoByPeriodoAtivoByEstudanteId(@PathVariable Long estudanteId) {
+//        List<Grupo> grupos = grupoService.getGruposByPeriodoAtivoByEstudanteId(estudanteId);
+//        if(grupos.isEmpty())
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(GrupoResponse.of(grupos));
+//    }
 
     @GetMapping("/getGrupoByPeriodoAtivoByProfessorId/{professorId}")
     public ResponseEntity<List<GrupoResponse>> getGruposByPeriodoAtivoByProfessorId(@PathVariable Long professorId){

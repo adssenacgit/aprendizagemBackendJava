@@ -9,22 +9,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "grau_dificuldade")
 @Data
+@Entity
+@Table(name = "periodo_dia_tipo")
 @AllArgsConstructor
 @NoArgsConstructor
-public class GrauDificuldade {
-
+public class PeriodoDiaTipo {
     @Id
-    @Column(name = "grau_dificuldade_id")
+    @Column(name = "periodo_dia_tipo_id")
     private Integer id;
 
-    @Column(name = "grau_dificuldade_descricao")
+    @Column(name = "periodo_dia_tipo_descricao")
     private String descricao;
 
-    @Column(name = "grau_dificuldade_status")
+    @Column(name = "periodo_dia_tipo_cor")
+    private String cor;
+
+    @Column(name = "periodo_dia_tipo_status")
     private Integer status;
-
-
 }

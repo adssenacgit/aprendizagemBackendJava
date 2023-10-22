@@ -16,16 +16,16 @@ public class Participante {
     @Id
     @Column(name = "participante_id")
     private Long id;
+
     @Column(name = "participante_data_matricula")
     private LocalDateTime dataMatricula;
+
     @Column(name = "participante_status")
     private Integer status;
-
 
     @ManyToOne
     @JoinColumn(name = "grupo_id")
     private Grupo grupo;
-
 
     @ManyToOne
     @JoinColumn(name = "estudante_id")
