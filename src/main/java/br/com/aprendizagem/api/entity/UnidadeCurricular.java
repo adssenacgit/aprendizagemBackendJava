@@ -64,6 +64,6 @@ public class UnidadeCurricular {
 	//@OneToMany(mappedBy = "competencia")
     //private Set<Competencia> competencia;
 
-	@OneToMany(mappedBy = "unidadeCurricular")
-    private Set<Bibliografia> bibliografia;
+//	@OneToMany(mappedBy = "unidadeCurricular")
+//    private Set<Bibliografia> bibliografia;
 }

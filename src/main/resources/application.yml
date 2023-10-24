@@ -1,13 +1,10 @@
-cron:
-  buscar:
-    estudantes: 0 39 09 * * *
 file:
   uploadDir: /Users/Public/uploads01
 auth0:
   audience: https://strategies_backend/api
 spring:
   datasource:
-    password: ads
+    password: adsads
     url: jdbc:mysql://jira.senacrio.com.br:3306/bdacompanhamento?useTimezone=true&serverTimezone=America/Sao_Paulo
     username: ads
   jpa:

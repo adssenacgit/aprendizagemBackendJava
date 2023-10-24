@@ -1,55 +1,51 @@
 package br.com.aprendizagem.api.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter @Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "estudante")
 public class Estudante {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "estudante_id", nullable = false)
 	private Long id;
 	@Column(name = "estudante_data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro;	
-	@Column(name = "estudante_data_trancamento", nullable = false)
+	@Column(name = "estudante_data_trancamento")
 	private LocalDateTime dataTrancamento;
-	@Column(name = "estudante_data_formatura", nullable = false)
+	@Column(name = "estudante_data_formatura")
 	private LocalDateTime dataFormatura;
 	@Column(name = "estudante_status", nullable = false)
 	private Integer status;	
 
 	@ManyToOne
-    @JoinColumn(name = "oferta_id", nullable = false)
-	@JsonIgnore
-	private Oferta oferta;
-	
-	@ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-	@JsonIgnore
+    @JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
+	@ManyToOne
+    @JoinColumn(name = "oferta_id")
+	private Oferta oferta;
+
+
     //@OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	//private Set<EstudanteScore> scores = new HashSet<>();
-    
-    //@OneToMany(mappedBy = "estudante")
-    //private Set<Participante> participantes;
+
+//    @ManyToMany
+//	@JoinTable(
+//			name = "participante",
+//			joinColumns = @JoinColumn(name = "estudante_id"),
+//			inverseJoinColumns = @JoinColumn(name = "grupo_id")
+//	)
+//	private List<Grupo> grupos;
 }

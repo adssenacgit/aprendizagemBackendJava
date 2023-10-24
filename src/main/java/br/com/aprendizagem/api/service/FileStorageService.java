@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,16 +31,16 @@ public class FileStorageService {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 
-        try {
-            Files.createDirectories(this.fileStorageLocation);
-        } catch (Exception ex) {
-            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
-        }
+//        try {
+//            Files.createDirectories(this.fileStorageLocation);
+//        } catch (Exception ex) {
+//            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+//        }
     }
 
     public String storeFile(MultipartFile file) {
         // Normalize file name
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         try {
             // Check if the file's name contains invalid characters
@@ -70,7 +71,7 @@ public class FileStorageService {
             throw new MyFileNotFoundException("File not found " + fileName, ex);
         }
     }
-    
+
     public String getContentType(HttpServletRequest request, Resource resource) {
     	// Try to determine file's content type
         String contentType = null;

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
+@Data @Builder
 public class PaginacaoRequest {
 	private Integer pagina;
     private Integer itensPorPagina;

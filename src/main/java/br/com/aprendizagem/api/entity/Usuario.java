@@ -43,20 +43,20 @@ public class Usuario {
 	private String telefone;
 	@Column(name = "usuario_data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro;
-	@Column(columnDefinition = "LONGBLOB", name = "usuario_foto", nullable = false)
+	@Column(columnDefinition = "LONGBLOB", name = "usuario_foto")
 	private byte[] foto;
 	@Column(name = "usuario_status", nullable = false)
 	private Integer status;
 	
 	
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<Estudante> estudantes = new HashSet<>();
+//    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//	private Set<Estudante> estudantes = new HashSet<>();
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<SenacCoin> senacCoin = new HashSet<>();
+//    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//	private Set<SenacCoin> senacCoin = new HashSet<>();
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<SenacCoinMovimentacao> senacCoinMovimentacao = new HashSet<>();
+//    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//	private Set<SenacCoinMovimentacao> senacCoinMovimentacao = new HashSet<>();
     
     //@OneToMany(mappedBy = "usuario")
     //private Set<Recurso> recursos = new HashSet<>();
