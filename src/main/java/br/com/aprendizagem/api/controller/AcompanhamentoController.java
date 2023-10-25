@@ -15,8 +15,8 @@ public class AcompanhamentoController {
     private final AcompanhamentoService acompanhamentoService;
 
     @GetMapping
-    public ResponseEntity<List<Acompanhamento>> getAllAcompanhamentos() {
-        List<Acompanhamento> acompanhamentos = acompanhamentoService.getAllAcompanhamentos();
+    public ResponseEntity<List<Acompanhamento>> getAcompanhamentos() {
+        List<Acompanhamento> acompanhamentos = acompanhamentoService.getAcompanhamentos();
         if (acompanhamentos.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
