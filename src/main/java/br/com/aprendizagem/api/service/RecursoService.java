@@ -130,7 +130,6 @@ public class RecursoService {
             recurso.setUsuario(usuarioOptional.get());
             return ResponseEntity.ok(recursoRepository.save(recurso));
         } else {
-            // You can handle this case as needed, e.g., throw an exception.
             throw new IllegalArgumentException("Id de usuário inválido");
         }
     }
