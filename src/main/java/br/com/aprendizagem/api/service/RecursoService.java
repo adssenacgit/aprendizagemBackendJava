@@ -3,8 +3,11 @@ package br.com.aprendizagem.api.service;
 import br.com.aprendizagem.api.entity.Recurso;
 import br.com.aprendizagem.api.entity.Usuario;
 import br.com.aprendizagem.api.repository.RecursoRepository;
+import br.com.aprendizagem.api.repository.UsuarioRepository;
+import br.com.aprendizagem.api.request.RecursoRequest;
 import br.com.aprendizagem.api.response.RecursoResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +15,13 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class RecursoService {
     private final RecursoRepository recursoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getAllRecursos() {
@@ -28,8 +33,16 @@ public class RecursoService {
     }
 
     @Transactional
-    public Recurso getRecursoById(Long id) {
+    public Recurso getArquivoRecursoById(Long id) {
         return recursoRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    public ResponseEntity<Recurso> getRecursoById(Long id) {
+        Recurso recurso = recursoRepository.findById(id).orElse(null);
+        if( recurso != null)
+            return ResponseEntity.ok(recurso);
+        return ResponseEntity.notFound().build();
     }
 
     @Transactional
@@ -61,5 +74,64 @@ public class RecursoService {
         }
 
         return ResponseEntity.ok(recursos);
+    }
+
+    @Transactional
+    public ResponseEntity<List<RecursoResponse>> getPublicRecursosSemArquivo() {
+        List<RecursoResponse> recursos = recursoRepository.getPublicRecursosSemArquivo();
+
+        if (recursos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(recursos);
+    }
+
+    @Transactional
+    public ResponseEntity<RecursoResponse> atualizarRecursoStatus(Long id, Integer status) {
+        Optional<Recurso> optionalRecurso = recursoRepository.findById(id);
+
+        if (optionalRecurso.isPresent()) {
+            Recurso recursoExistente = optionalRecurso.get();
+            recursoExistente.setStatus(status);
+            Recurso recursoAtualizado = recursoRepository.save(recursoExistente);
+            return ResponseEntity.ok(RecursoResponse.of(recursoAtualizado));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<Recurso> updateRecursoNomeById(Long id, String nomeAtualizado) {
+        Optional<Recurso> optionalRecurso = recursoRepository.findById(id);
+
+        if (optionalRecurso.isPresent()) {
+            Recurso recursoExistente = optionalRecurso.get();
+            recursoExistente.setNomeArquivo(nomeAtualizado);
+            Recurso recursoAtualizado = recursoRepository.save(recursoExistente);
+            return ResponseEntity.ok(recursoAtualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<Recurso> createRecurso(RecursoRequest recursoRequest) {
+        Recurso recurso = new Recurso();
+        recurso.setDescricao(recursoRequest.getDescricao());
+        recurso.setNomeArquivo(recursoRequest.getNomeArquivo());
+        recurso.setArquivo(recursoRequest.getArquivo());
+        recurso.setMimeType(recursoRequest.getMimeType());
+        recurso.setDataCadastro(recursoRequest.getDataCadastro());
+        recurso.setStatus(recursoRequest.getStatus());
+
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(recursoRequest.getUsuarioId());
+        if (usuarioOptional.isPresent()) {
+            recurso.setUsuario(usuarioOptional.get());
+            return ResponseEntity.ok(recursoRepository.save(recurso));
+        } else {
+            // You can handle this case as needed, e.g., throw an exception.
+            throw new IllegalArgumentException("Id de usuário inválido");
+        }
     }
 }
