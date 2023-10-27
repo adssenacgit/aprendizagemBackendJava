@@ -6,10 +6,7 @@ import br.com.aprendizagem.api.entity.ChapterTag;
 import br.com.aprendizagem.api.service.ChapterAssuntoTagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class ChapterAssuntoTagController {
     @GetMapping
     public ResponseEntity<List<ChapterAssuntoTag>> getAllChapterAssuntoTag(){
         return ResponseEntity.ok().body(chapterAssuntoTagService.getAllChapterAssuntoTag());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ChapterAssuntoTag> getChapterAssuntoTagById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(chapterAssuntoTagService.getChapterAssuntoTagById(id));
     }
 
     @PostMapping

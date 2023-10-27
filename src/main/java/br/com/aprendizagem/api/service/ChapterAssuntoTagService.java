@@ -19,6 +19,10 @@ public class ChapterAssuntoTagService {
         return chapterAssuntoTagRepository.findAll();
     }
 
+    public ChapterAssuntoTag getChapterAssuntoTagById(Integer id){
+        return chapterAssuntoTagRepository.findById(id).orElse(null);
+    }
+
     public ChapterAssuntoTag postChapterAssuntoTag(ChapterAssunto chapterAssunto, ChapterTag chapterTag){
         ChapterAssuntoTag chapterAssuntoTag = new ChapterAssuntoTag(null, chapterAssunto, chapterTag);
         return chapterAssuntoTagRepository.save(chapterAssuntoTag);
