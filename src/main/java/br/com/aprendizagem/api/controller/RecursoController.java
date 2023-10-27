@@ -49,6 +49,11 @@ public class RecursoController {
         return recursoService.getRecursoById(id);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Recurso> updateRecursoById(@PathVariable Long id, @RequestBody RecursoRequest recurso) {
+        return recursoService.updateRecurso(id, recurso);
+    }
+
     @PutMapping("atualizarRecursoNome/{id}")
     public ResponseEntity<Recurso> updateRecursoNomeById(@PathVariable Long id, @RequestBody String nomeAtualizado) {
         return recursoService.updateRecursoNomeById(id, nomeAtualizado);

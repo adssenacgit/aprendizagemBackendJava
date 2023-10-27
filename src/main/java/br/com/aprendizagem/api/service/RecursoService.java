@@ -124,6 +124,7 @@ public class RecursoService {
         recurso.setMimeType(recursoRequest.getMimeType());
         recurso.setDataCadastro(recursoRequest.getDataCadastro());
         recurso.setStatus(recursoRequest.getStatus());
+        recurso.setTamanho(recursoRequest.getTamanho());
 
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(recursoRequest.getUsuarioId());
         if (usuarioOptional.isPresent()) {
@@ -131,6 +132,28 @@ public class RecursoService {
             return ResponseEntity.ok(recursoRepository.save(recurso));
         } else {
             throw new IllegalArgumentException("Id de usuário inválido");
+        }
+    }
+    @Transactional
+    public ResponseEntity<Recurso> updateRecurso(Long id, RecursoRequest recursoAtualizado) {
+        Optional<Recurso> optRecurso = recursoRepository.findById(id);
+        if (optRecurso.isPresent()) {
+            Recurso existingRecurso = optRecurso.get();
+            existingRecurso.setDescricao(recursoAtualizado.getDescricao());
+            existingRecurso.setNomeArquivo(recursoAtualizado.getNomeArquivo());
+            existingRecurso.setArquivo(recursoAtualizado.getArquivo());
+            existingRecurso.setMimeType(recursoAtualizado.getMimeType());
+            existingRecurso.setStatus(recursoAtualizado.getStatus());
+            existingRecurso.setTamanho(recursoAtualizado.getTamanho());
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(recursoAtualizado.getUsuarioId());
+            if (usuarioOptional.isPresent()) {
+                existingRecurso.setUsuario(usuarioOptional.get());
+            } else {
+                throw new IllegalArgumentException("Id de usuário inválido");
+            }
+            return ResponseEntity.ok(recursoRepository.save(existingRecurso));
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
