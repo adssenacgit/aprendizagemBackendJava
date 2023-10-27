@@ -67,12 +67,11 @@ public class RecursoService {
 
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getActiveRecursosByUsuarioIdSemArquivo(String usuarioId) {
+
         List<RecursoResponse> recursos = recursoRepository.getActiveRecursosByUsuarioIdSemArquivo(usuarioId);
-
         if (recursos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.ok(recursos);
     }
 
@@ -81,7 +80,7 @@ public class RecursoService {
         List<RecursoResponse> recursos = recursoRepository.getPublicRecursosSemArquivo();
 
         if (recursos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
 
         return ResponseEntity.ok(recursos);
