@@ -18,6 +18,7 @@ public class RecursoResponse {
     private String mimeType;
     private LocalDateTime dataCadastro;
     private Integer status;
+    private Integer tamanho;
     private Usuario usuario;
 
 
@@ -29,6 +30,7 @@ public class RecursoResponse {
                 .mimeType(recurso.getMimeType())
                 .dataCadastro(recurso.getDataCadastro())
                 .status(recurso.getStatus())
+                .tamanho(recurso.getTamanho())
                 .usuario(recurso.getUsuario())
                 .build();
     }

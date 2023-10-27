@@ -26,6 +26,7 @@ public class RecursoRequest {
     private String mimeType;
     private LocalDateTime dataCadastro;
     private Integer status;
+    private Integer tamanho;
     private String usuarioId;
 
 }

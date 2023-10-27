@@ -40,6 +40,9 @@ public class Recurso {
     @Column(name = "recurso_status")
     private Integer status;
 
+    @Column(name = "recurso_tamanho")
+    private Integer tamanho;
+
     @JoinColumn(name = "usuario_id")
     @ManyToOne
     private Usuario usuario;
