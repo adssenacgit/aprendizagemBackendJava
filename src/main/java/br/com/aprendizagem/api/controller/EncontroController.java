@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.Encontro;
 import br.com.aprendizagem.api.response.EncontroResponse;
+import br.com.aprendizagem.api.response.EncontroSituacaoResponse;
 import br.com.aprendizagem.api.service.EncontroService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,10 @@ public class EncontroController {
     @GetMapping("filtrarByGrupoId/{grupoId}")
     public ResponseEntity<List<EncontroResponse>> getEncontrosByGrupoId(@PathVariable Long grupoId){
         return encontroService.getEncontrosByGrupoId(grupoId);
+    }
+
+    @GetMapping("filtrarEncontrosComSituacaoByGrupoId")
+    public ResponseEntity<List<EncontroSituacaoResponse>> getEncontrosSituacaoByGrupoId(@PathVariable Long grupoId){
+        return encontroService.getEncontrosSituacaoByGrupoId(grupoId);
     }
 }

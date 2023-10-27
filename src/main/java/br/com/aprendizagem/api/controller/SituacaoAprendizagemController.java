@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.SituacaoAprendizagem;
+import br.com.aprendizagem.api.entity.SituacaoEncontro;
 import br.com.aprendizagem.api.response.SituacaoAprendizagemResponse;
 import br.com.aprendizagem.api.service.SituacaoAprendizagemService;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,9 @@ public class SituacaoAprendizagemController {
         return situacaoAprendizagemService.getSituacaoAprendizagemById(id);
     }
 
+    @GetMapping("filtrarSituacoesAprendizagemPorEncontroId/{encontroId}")
+    public ResponseEntity<List<SituacaoAprendizagem>> getSituacoesAprendizagemByEncontroId(@PathVariable Long encontroId) {
+        return situacaoAprendizagemService.getSituacoesAprendizagemByEncontroId(encontroId);
+    }
 }
 
