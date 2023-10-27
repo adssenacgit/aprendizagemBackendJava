@@ -25,4 +25,5 @@ public class ChapterTag {
 
     @Column(name = "chapter_tag_status")
     private Integer status = 1;
+
 }

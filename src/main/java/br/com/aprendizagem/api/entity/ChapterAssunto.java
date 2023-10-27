@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -53,6 +57,7 @@ public class ChapterAssunto {
     private Usuario usuarioVerificacao;
 
 
+
 }
 //chapter_assunto_id
 //chapter_assunto_data_cadastro
@@ -65,3 +70,4 @@ public class ChapterAssunto {
 //chapter_id
 //usuario_id
 //usuario_id_verificacao
+//chapter_tag
