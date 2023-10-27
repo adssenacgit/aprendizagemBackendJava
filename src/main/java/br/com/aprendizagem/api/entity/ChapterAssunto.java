@@ -1,12 +1,17 @@
 package br.com.aprendizagem.api.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Table(name = "chapter_assunto")
 public class ChapterAssunto {
     @Id
     @Column(name = "chapter_assunto_id")

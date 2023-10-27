@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "chapter_assunto_comentario")
 public class ChapterAssuntoComentario {
     @Id
     @Column(name = "chapter_assunto_comentario_id")
