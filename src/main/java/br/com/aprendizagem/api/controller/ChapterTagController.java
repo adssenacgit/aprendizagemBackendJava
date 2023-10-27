@@ -40,7 +40,11 @@ public class ChapterTagController {
 
     @PostMapping
     public ResponseEntity<ChapterTag> postChapterTag(ChapterTag chapterTag) {
-        return ResponseEntity.ok(chapterTagService.postChapterTag(chapterTag));
+        try {
+            return ResponseEntity.ok(chapterTagService.postChapterTag(chapterTag));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

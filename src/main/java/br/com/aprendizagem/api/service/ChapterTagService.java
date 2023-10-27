@@ -40,10 +40,6 @@ public class ChapterTagService {
         return chapterTagRepository.save(chapterTag);
     }
 
-    public ChapterTag putChapterTag(ChapterTag chapterTag) {
-        // tratar se o id não existir
-        return chapterTagRepository.save(chapterTag);
-    }
 
     public void deleteChapterTag(Long id) {
         ChapterTag chapterTag = chapterTagRepository.findById(id).orElse(null);

@@ -56,6 +56,11 @@ public class ChapterAssunto {
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "chapter_assunto_tag",
+            joinColumns = @JoinColumn(name = "chapter_assunto_id"),
+            inverseJoinColumns = @JoinColumn(name = "chapter_tag_id"))
+    private Set<ChapterTag> tags = new HashSet<>();
 
 
 }

@@ -1,13 +1,8 @@
 package br.com.aprendizagem.api.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
@@ -17,13 +12,20 @@ import javax.persistence.Table;
 public class ChapterTag {
 
     @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     @Column(name = "chapter_tag_id")
     private Long id;
 
-    @Column(name = "chapter_tag_descricao")
+    @Getter
+    @Column(name = "chapter_tag_descricao", unique = true)
     private String descricao;
 
+    @Getter
     @Column(name = "chapter_tag_status")
-    private Integer status = 1;
+    private Integer status;
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
 }
