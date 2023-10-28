@@ -48,4 +48,7 @@ public class ChapterAssuntoService {
         }
     }
 
+    public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
+        return chapterAssuntoRepository.save(chapterAssunto);
+    }
 }

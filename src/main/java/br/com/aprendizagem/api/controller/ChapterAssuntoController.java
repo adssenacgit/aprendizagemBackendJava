@@ -17,7 +17,6 @@ import java.util.List;
 public class ChapterAssuntoController {
 
     private final ChapterAssuntoService chapterAssuntoService;
-    private final ChapterTagService chapterTagService;
 
     @GetMapping
     public ResponseEntity<List<ChapterAssunto>> getAllChapterAssunto() {
@@ -31,6 +30,15 @@ public class ChapterAssuntoController {
             return ResponseEntity.ok(chapterAssunto);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<ChapterAssunto> postChapterAssunto(@RequestBody ChapterAssunto chapterAssunto) {
+        try {
+            return ResponseEntity.ok(chapterAssuntoService.postChapterAssunto(chapterAssunto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
