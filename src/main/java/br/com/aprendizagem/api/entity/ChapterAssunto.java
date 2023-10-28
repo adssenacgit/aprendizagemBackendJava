@@ -1,12 +1,21 @@
 package br.com.aprendizagem.api.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Table(name = "chapter_assunto")
 public class ChapterAssunto {
     @Id
     @Column(name = "chapter_assunto_id")
@@ -47,6 +56,12 @@ public class ChapterAssunto {
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "chapter_assunto_tag",
+            joinColumns = @JoinColumn(name = "chapter_assunto_id"),
+            inverseJoinColumns = @JoinColumn(name = "chapter_tag_id"))
+    private Set<ChapterTag> tags = new HashSet<>();
+
 
 }
 //chapter_assunto_id
@@ -60,3 +75,4 @@ public class ChapterAssunto {
 //chapter_id
 //usuario_id
 //usuario_id_verificacao
+//chapter_tag
