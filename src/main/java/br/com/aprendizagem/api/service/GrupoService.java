@@ -22,12 +22,12 @@ public class GrupoService {
     }
 
     @Transactional
-    public ResponseEntity<List<GrupoResponse>> getAllGrupos(){
+    public ResponseEntity<List<Grupo>> getAllGrupos(){
         List<Grupo> grupos = grupoRepository.findAll();
         if (grupos.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(GrupoResponse.of(grupos));
+        return ResponseEntity.ok(grupos);
     }
 
     @Transactional

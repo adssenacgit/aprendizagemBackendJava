@@ -1,9 +1,6 @@
 package br.com.aprendizagem.api.response;
 
-import br.com.aprendizagem.api.entity.DiaLetivo;
-import br.com.aprendizagem.api.entity.Encontro;
-import br.com.aprendizagem.api.entity.EncontroTipo;
-import br.com.aprendizagem.api.entity.Grupo;
+import br.com.aprendizagem.api.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +28,7 @@ public class EncontroResponse {
     private String local;
     private Integer status;
     private EncontroTipo encontroTipo;
+    private List<SituacaoAprendizagemResponse> situacoesAprendizagem;
 
     public static EncontroResponse of (Encontro encontro) {
         return EncontroResponse.builder()
@@ -43,6 +41,7 @@ public class EncontroResponse {
                 .local(encontro.getLocal())
                 .status(encontro.getStatus())
                 .encontroTipo(encontro.getEncontroTipo())
+                .situacoesAprendizagem(SituacaoAprendizagemResponse.of(encontro.getSituacoesAprendizagem()))
                 .build();
     }
 

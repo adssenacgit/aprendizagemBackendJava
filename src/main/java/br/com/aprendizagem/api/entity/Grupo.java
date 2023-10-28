@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -43,6 +46,6 @@ public class Grupo {
     @JoinColumn (name = "professor_id")
     private Professor professor;
 
-//    @OneToMany(mappedBy = "grupos", fetch = FetchType.EAGER)
-//    private List<Participante> participantes;
+//    @ManyToMany(mappedBy = "grupos", fetch = FetchType.EAGER)
+//    private Set<Estudante> estudantes = new HashSet<>();
 }

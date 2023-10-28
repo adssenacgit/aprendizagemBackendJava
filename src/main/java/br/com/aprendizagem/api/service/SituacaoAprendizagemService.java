@@ -24,15 +24,18 @@ public class SituacaoAprendizagemService {
     public ResponseEntity<List<SituacaoAprendizagemResponse>> getAllSituacoesAprendizagem() {
         List<SituacaoAprendizagem> situacoes = situacaoAprendizagemRepository.findAll();
         if(situacoes.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(SituacaoAprendizagemResponse.of(situacoes));
     }
 
     @Transactional
-    public ResponseEntity<SituacaoAprendizagem> getSituacaoAprendizagemById(Long id) {
-        Optional<SituacaoAprendizagem> situacaoOpt = situacaoAprendizagemRepository.findById(id);
-        return situacaoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+    public ResponseEntity<SituacaoAprendizagemResponse> getSituacaoAprendizagemById(Long id) {
+        SituacaoAprendizagem situacaoAprendizagem = situacaoAprendizagemRepository.findById(id).orElse(null);
+        if (situacaoAprendizagem == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(SituacaoAprendizagemResponse.of(situacaoAprendizagem));
     }
 
     @Transactional

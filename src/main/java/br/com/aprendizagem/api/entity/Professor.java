@@ -18,7 +18,7 @@ public class Professor {
     @Column(name = "professor_status")
     private Integer status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }

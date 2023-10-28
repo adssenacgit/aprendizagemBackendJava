@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Participante;
 import br.com.aprendizagem.api.repository.ParticipanteRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ParticipanteService {
 
     private final ParticipanteRepository participanteRepository;
-
-    public ParticipanteService(ParticipanteRepository participanteRepository) {
-        this.participanteRepository = participanteRepository;
-    }
 
     @Transactional
     public ResponseEntity<List<Participante>> getAllParticipantes(){

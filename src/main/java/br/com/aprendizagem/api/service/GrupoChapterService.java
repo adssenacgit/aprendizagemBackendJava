@@ -7,12 +7,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class GrupoChapterService {
     private final GrupoChapterRespository grupoChapterRespository;
+    @Transactional
     public ResponseEntity<Chapter> getChapterByGrupoId(Long grupoId) {
         Optional<GrupoChapter> optGrupoChapter = grupoChapterRespository.findByGrupoId(grupoId);
         if (optGrupoChapter.isPresent()) {

@@ -5,6 +5,7 @@ import br.com.aprendizagem.api.repository.ChapterTagRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import java.util.List;
 public class ChapterTagService {
     private final ChapterTagRepository chapterTagRepository;
 
+    @Transactional
     public List<ChapterTag> getAllChapterTags() {
         return chapterTagRepository.findAll();
     }
 
+    @Transactional
     public List<ChapterTag> getAllActiveChapterTags() {
         List<ChapterTag> chapterTags = new ArrayList<>();
         for (ChapterTag chapterTag : chapterTagRepository.findAll()) {
@@ -28,6 +31,7 @@ public class ChapterTagService {
         return chapterTags;
     }
 
+    @Transactional
     public ChapterTag getChapterTagById(Long id) {
         ChapterTag chapterTag = chapterTagRepository.findById(id).orElse(null);
         if (chapterTag != null && chapterTag.getStatus() == 1) {
@@ -36,11 +40,12 @@ public class ChapterTagService {
         return null;
     }
 
+    @Transactional
     public ChapterTag postChapterTag(ChapterTag chapterTag) {
         return chapterTagRepository.save(chapterTag);
     }
 
-
+    @Transactional
     public void deleteChapterTag(Long id) {
         ChapterTag chapterTag = chapterTagRepository.findById(id).orElse(null);
         if (chapterTag != null) {

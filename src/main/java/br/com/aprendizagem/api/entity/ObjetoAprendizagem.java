@@ -1,12 +1,15 @@
 package br.com.aprendizagem.api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,7 +30,7 @@ public class ObjetoAprendizagem {
 
     @Lob
     @Column(name = "objeto_aprendizagem_arquivo", columnDefinition = "longblob")
-    private Blob arquivo;
+    private byte[] arquivo;
 
     @Column(name = "objeto_aprendizagem_ordem")
     private Integer ordem;
@@ -42,4 +45,8 @@ public class ObjetoAprendizagem {
     @ManyToOne
     @JoinColumn(name ="usuario_id")
     private Usuario usuario;
+
+//    @JsonBackReference
+//    @ManyToMany(mappedBy = "objetosAprendizagem", fetch = FetchType.LAZY)
+//    private List<SituacaoAprendizagem> situacoesAprendizagem;
 }

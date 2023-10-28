@@ -25,7 +25,7 @@ public class GrupoController {
 
 
     @GetMapping
-    public ResponseEntity<List<GrupoResponse>> getAllGrupos(){
+    public ResponseEntity<List<Grupo>> getAllGrupos(){
         return grupoService.getAllGrupos();
     }
 

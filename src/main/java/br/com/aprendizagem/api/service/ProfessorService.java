@@ -5,6 +5,7 @@ import br.com.aprendizagem.api.repository.ProfessorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -12,6 +13,7 @@ import java.util.List;
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
 
+    @Transactional
     public List<Professor> getProfessoresAtivos(){
         return professorRepository.findAll();
     }

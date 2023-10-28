@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -13,6 +14,7 @@ import java.util.List;
 public class GrauDificuldadeService {
 
     private final GrauDificuldadeRepository grauDificuldadeRepository;
+    @Transactional
     public ResponseEntity<List<GrauDificuldade>> getAllGrausDificuldade() {
         List<GrauDificuldade> dificuldades = grauDificuldadeRepository.findAll();
         if(dificuldades.isEmpty()){

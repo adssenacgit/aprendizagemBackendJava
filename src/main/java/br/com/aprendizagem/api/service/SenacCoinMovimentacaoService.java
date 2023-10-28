@@ -16,9 +16,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class SenacCoinMovimentacaoService {
-	@Autowired
 	private SenacCoinMovimentacaoRepository repo;
-	@Autowired
 	private SenacCoinRepository scRepo;
 	
 	@Transactional

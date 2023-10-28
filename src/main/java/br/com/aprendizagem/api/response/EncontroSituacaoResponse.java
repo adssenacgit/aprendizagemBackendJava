@@ -9,11 +9,8 @@ import net.bytebuddy.implementation.bind.annotation.Super;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EncontroSituacaoResponse extends EncontroResponse {
-    private List<SituacaoAprendizagem> situacoesAprendizagem;
+//    private List<SituacaoAprendizagem> situacoesAprendizagem;
 
 
 //    public static EncontroSituacaoResponse of(Encontro encontro) {

@@ -26,7 +26,7 @@ public class SituacaoAprendizagemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SituacaoAprendizagem> getSituacaoAprendizagemById(@PathVariable Long id) {
+    public ResponseEntity<SituacaoAprendizagemResponse> getSituacaoAprendizagemById(@PathVariable Long id) {
         return situacaoAprendizagemService.getSituacaoAprendizagemById(id);
     }
 

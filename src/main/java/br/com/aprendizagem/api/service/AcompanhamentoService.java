@@ -2,9 +2,12 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Acompanhamento;
 import br.com.aprendizagem.api.repository.AcompanhamentoRepository;
+import br.com.aprendizagem.api.response.AcompanhamentoResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,16 +18,16 @@ public class AcompanhamentoService {
     private final AcompanhamentoRepository acompanhamentoRepository;
 
 
-    public List<Acompanhamento> getAcompanhamentos() {
-        List<Acompanhamento> list = new ArrayList<>();
-        for (Acompanhamento acompanhamento : acompanhamentoRepository.findAll()) {
-            if (acompanhamento.getStatus() == 1) {
-                list.add(acompanhamento);
-            }
+    @Transactional
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponse() {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.getActiveAcompanhamentos();
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
-        return list;
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
     }
 
+    @Transactional
     public Acompanhamento getAcompanhamentoById(Long id) {
         Acompanhamento acompanhamento = acompanhamentoRepository.findById(id).orElse(null);
         if (acompanhamento != null && acompanhamento.getStatus() == 1) {
@@ -33,8 +36,34 @@ public class AcompanhamentoService {
         return null;
     }
 
+    @Transactional
     public Acompanhamento postAcompanhamento(Acompanhamento acompanhamento) {
         return acompanhamentoRepository.save(acompanhamento);
     }
+    @Transactional
+    public ResponseEntity<List<Acompanhamento>> getActiveAcompanhamentos() {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.getActiveAcompanhamentos();
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(acompanhamentos);
+    }
 
+    @Transactional
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByGrupoIdByEstudanteId(Long grupoId, Long estudanteId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Grupo_IdAndParticipante_Estudante_Id(grupoId, estudanteId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
+
+    @Transactional
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByEstudanteId(Long estudanteId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Estudante_Id(estudanteId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
 }

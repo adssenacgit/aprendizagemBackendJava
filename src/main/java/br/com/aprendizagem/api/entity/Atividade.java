@@ -1,11 +1,12 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.time.LocalDateTime;
 
 @Data
@@ -40,7 +41,8 @@ public class Atividade {
     @Column(name = "atividade_status")
     private Integer status;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="situacao_aprendizagem_id")
     private SituacaoAprendizagem situacaoAprendizagem;
 

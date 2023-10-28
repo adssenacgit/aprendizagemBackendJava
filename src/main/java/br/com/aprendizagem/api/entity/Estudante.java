@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
@@ -41,7 +42,8 @@ public class Estudante {
     //@OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	//private Set<EstudanteScore> scores = new HashSet<>();
 
-//    @ManyToMany
+//    @ManyToMany(fetch = FetchType.LAZY)
+//	@JsonBackReference
 //	@JoinTable(
 //			name = "participante",
 //			joinColumns = @JoinColumn(name = "estudante_id"),

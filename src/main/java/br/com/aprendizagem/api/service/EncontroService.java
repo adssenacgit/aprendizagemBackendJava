@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Encontro;
 import br.com.aprendizagem.api.repository.EncontroRepository;
+import br.com.aprendizagem.api.response.EncontroAlunoResponse;
 import br.com.aprendizagem.api.response.EncontroResponse;
 import br.com.aprendizagem.api.response.EncontroSituacaoResponse;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class EncontroService {
 
     public final EncontroRepository encontroRepository;
     private final SituacaoAprendizagemService situacaoAprendizagemService;
+    @Transactional
     public ResponseEntity<List<Encontro>> getAllEncontros() {
         List<Encontro> encontros = encontroRepository.findAll();
         if (encontros.isEmpty()) {
@@ -33,6 +35,11 @@ public class EncontroService {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(EncontroResponse.of(encontros.get()));
+    }
+
+    @Transactional
+    public ResponseEntity<List<EncontroAlunoResponse>> getEncontrosByGrupoIdByEstudanteId(Long grupoId, Long estudanteId) {
+        return ResponseEntity.notFound().build();
     }
 
 //    @Transactional

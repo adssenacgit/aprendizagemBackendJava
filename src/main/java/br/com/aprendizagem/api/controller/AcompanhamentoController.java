@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.Acompanhamento;
+import br.com.aprendizagem.api.response.AcompanhamentoResponse;
 import br.com.aprendizagem.api.service.AcompanhamentoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,8 @@ public class AcompanhamentoController {
     private final AcompanhamentoService acompanhamentoService;
 
     @GetMapping
-    public ResponseEntity<List<Acompanhamento>> getAcompanhamentos() {
-        List<Acompanhamento> acompanhamentos = acompanhamentoService.getAcompanhamentos();
-        if (acompanhamentos.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(acompanhamentos);
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponse() {
+        return acompanhamentoService.getAcompanhamentosResponse();
     }
 
     @GetMapping("getAcompanhamentoById/{id}")
@@ -30,6 +27,16 @@ public class AcompanhamentoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(acompanhamento);
+    }
+
+    @GetMapping("filtrarByGrupoIdByEstudanteId/{grupoId}/{estudanteId}")
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentoByGrupoIdByEstudanteId(@PathVariable Long grupoId, @PathVariable Long estudanteId) {
+        return acompanhamentoService.getAcompanhamentosResponseByGrupoIdByEstudanteId(grupoId, estudanteId);
+    }
+
+    @GetMapping("filtrarByEstudanteId/{estudanteId}/")
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentoByGrupoIdByEstudanteId(@PathVariable Long estudanteId) {
+        return acompanhamentoService.getAcompanhamentosResponseByEstudanteId(estudanteId);
     }
 
     @PostMapping

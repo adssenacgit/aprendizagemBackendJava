@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.Encontro;
+import br.com.aprendizagem.api.response.EncontroAlunoResponse;
 import br.com.aprendizagem.api.response.EncontroResponse;
 import br.com.aprendizagem.api.response.EncontroSituacaoResponse;
 import br.com.aprendizagem.api.service.EncontroService;
@@ -29,8 +30,13 @@ public class EncontroController {
         return encontroService.getEncontrosByGrupoId(grupoId);
     }
 
-    @GetMapping("filtrarEncontrosComSituacaoByGrupoId")
-    public ResponseEntity<List<EncontroSituacaoResponse>> getEncontrosSituacaoByGrupoId(@PathVariable Long grupoId){
-        return encontroService.getEncontrosSituacaoByGrupoId(grupoId);
+    @GetMapping("filtrarByGrupoIdByEstudanteId/{grupoId}")
+    public ResponseEntity<List<EncontroAlunoResponse>> getEncontrosByGrupoIdByEstudanteId(@PathVariable Long grupoId, @PathVariable Long estudanteId){
+        return encontroService.getEncontrosByGrupoIdByEstudanteId(grupoId, estudanteId);
     }
+
+//    @GetMapping("filtrarEncontrosComSituacaoByGrupoId")
+//    public ResponseEntity<List<EncontroSituacaoResponse>> getEncontrosSituacaoByGrupoId(@PathVariable Long grupoId){
+//        return encontroService.getEncontrosSituacaoByGrupoId(grupoId);
+//    }
 }
