@@ -26,7 +26,7 @@ public class ChapterAssuntoTagController {
         return ResponseEntity.ok().body(chapterAssuntoTagService.getChapterAssuntoTagById(id));
     }
 
-    @PostMapping
+    @PostMapping("/public")
     public ResponseEntity<ChapterAssuntoTag> postChapterAssuntoTag(ChapterAssunto chapterAssunto, ChapterTag chapterTag){
         return ResponseEntity.ok().body(chapterAssuntoTagService.postChapterAssuntoTag(chapterAssunto, chapterTag));
     }

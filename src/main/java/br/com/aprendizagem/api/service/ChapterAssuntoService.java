@@ -48,6 +48,7 @@ public class ChapterAssuntoService {
         }
     }
 
+    @Transactional
     public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
         return chapterAssuntoRepository.save(chapterAssunto);
     }
