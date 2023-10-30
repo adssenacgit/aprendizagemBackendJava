@@ -18,6 +18,7 @@ import java.util.Set;
 @Table(name = "chapter_assunto")
 public class ChapterAssunto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chapter_assunto_id")
     private Integer id;
 

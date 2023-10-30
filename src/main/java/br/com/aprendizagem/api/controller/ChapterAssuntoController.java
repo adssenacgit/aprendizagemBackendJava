@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,16 +36,17 @@ public class ChapterAssuntoController {
         }
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<ChapterAssunto> postChapterAssunto(@RequestBody ChapterAssunto chapterAssunto) {
         try {
+            chapterAssunto.setDataCadastro(LocalDateTime.now());
             return ResponseEntity.ok(chapterAssuntoService.postChapterAssunto(chapterAssunto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @PostMapping("/{id}/associar-tags")
+    @PostMapping("{id}/associar-tags")
     public ResponseEntity<Void> associarTagAAssunto(@PathVariable Integer id, @RequestBody List<Integer> tagIds) {
         ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoWithTags(id);
         if (chapterAssunto != null) {
