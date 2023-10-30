@@ -27,10 +27,10 @@ public class Atividade {
     private String descricao;
 
     @Column(name = "atividade_data_inicio")
-    private LocalDateTime inicio;
+    private LocalDateTime dataInicio;
 
     @Column(name = "atividade_data_fim")
-    private LocalDateTime fim;
+    private LocalDateTime dataFim;
 
     @Column(name = "atividade_duracao_minutos")
     private Integer duracaoMinutos;

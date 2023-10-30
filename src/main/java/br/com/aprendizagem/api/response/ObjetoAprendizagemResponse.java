@@ -24,6 +24,7 @@ public class ObjetoAprendizagemResponse {
     private Long id;
     private String titulo;
     private String descricao;
+    private Boolean hasArquivo;
     private Integer ordem;
     private Integer status;
     private GrauDificuldade grauDificuldade;
@@ -33,6 +34,7 @@ public class ObjetoAprendizagemResponse {
                 .id(objetoAprendizagem.getId())
                 .titulo(objetoAprendizagem.getTitulo())
                 .descricao(objetoAprendizagem.getDescricao())
+                .hasArquivo(objetoAprendizagem.getArquivo() != null)
                 .ordem(objetoAprendizagem.getOrdem())
                 .status(objetoAprendizagem.getStatus())
                 .grauDificuldade(objetoAprendizagem.getGrauDificuldade())

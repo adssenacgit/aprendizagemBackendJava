@@ -22,4 +22,9 @@ public class ObjetoAprendizagemService {
         }
         return ResponseEntity.ok(objetos);
     }
+
+    @Transactional
+    public ObjetoAprendizagem getArquivoObjetoById(Long id) {
+        return objetoAprendizagemRepository.findById(id).orElse(null);
+    }
 }

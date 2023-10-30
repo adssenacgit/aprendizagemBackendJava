@@ -34,6 +34,16 @@ public class AcompanhamentoController {
         return acompanhamentoService.getAcompanhamentosResponseByGrupoIdByEstudanteId(grupoId, estudanteId);
     }
 
+    @GetMapping("filtrarByGrupoIdByEstudanteIdByAtividadeId/{grupoId}/{estudanteId}/{atividadeId}")
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentoByGrupoIdByEstudanteIdByAtividadeId(@PathVariable Long grupoId, @PathVariable Long estudanteId, @PathVariable Long atividadeId) {
+        return acompanhamentoService.getAcompanhamentosResponseByGrupoIdByEstudanteIdByAtividadeId(grupoId, estudanteId, atividadeId);
+    }
+
+    @GetMapping("filtrarByGrupoIdByEstudanteIdByObjetoId/{grupoId}/{estudanteId}/{objetoId}")
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentoByGrupoIdByEstudanteIdByObjetoId(@PathVariable Long grupoId, @PathVariable Long estudanteId, @PathVariable Long objetoId) {
+        return acompanhamentoService.getAcompanhamentosResponseByGrupoIdByEstudanteIdByObjetoId(grupoId, estudanteId, objetoId);
+    }
+
     @GetMapping("filtrarByEstudanteId/{estudanteId}/")
     public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentoByGrupoIdByEstudanteId(@PathVariable Long estudanteId) {
         return acompanhamentoService.getAcompanhamentosResponseByEstudanteId(estudanteId);

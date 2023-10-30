@@ -66,4 +66,38 @@ public class AcompanhamentoService {
         }
         return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
     }
+
+    @Transactional
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByAtividadeIdByEstudanteId(Long atividadeId, Long estudanteId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByAtividade_IdAndParticipante_Estudante_Id(atividadeId, estudanteId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
+
+    @Transactional
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByObjetoIdByEstudanteId(Long objetoId, Long estudanteId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByObjetoAprendizagem_IdAndParticipante_Estudante_Id(objetoId, estudanteId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
+
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByGrupoIdByEstudanteIdByAtividadeId(Long grupoId, Long estudanteId, Long atividadeId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndAtividade_Id(grupoId, estudanteId, atividadeId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
+
+    public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByGrupoIdByEstudanteIdByObjetoId(Long grupoId, Long estudanteId, Long objetoId) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndObjetoAprendizagem_Id(grupoId, estudanteId, objetoId);
+        if(acompanhamentos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
+    }
 }

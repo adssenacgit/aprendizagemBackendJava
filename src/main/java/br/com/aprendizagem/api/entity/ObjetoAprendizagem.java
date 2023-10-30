@@ -28,6 +28,7 @@ public class ObjetoAprendizagem {
     @Column(name = "objeto_aprendizagem_descricao", columnDefinition = "longtext")
     private String descricao;
 
+    @JsonIgnore
     @Lob
     @Column(name = "objeto_aprendizagem_arquivo", columnDefinition = "longblob")
     private byte[] arquivo;
@@ -42,9 +43,9 @@ public class ObjetoAprendizagem {
     @JoinColumn(name ="grau_dificuldade_id")
     private GrauDificuldade grauDificuldade;
 
-    @ManyToOne
-    @JoinColumn(name ="usuario_id")
-    private Usuario usuario;
+//    @ManyToOne
+//    @JoinColumn(name ="usuario_id")
+//    private Usuario usuario;
 
 //    @JsonBackReference
 //    @ManyToMany(mappedBy = "objetosAprendizagem", fetch = FetchType.LAZY)

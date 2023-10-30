@@ -24,8 +24,8 @@ public class AcompanhamentoResponse {
     private Integer status;
     private ParticipanteResponse participante;
     private Integer avaliacaoConceitoId;
-    private Long atividadeId;
-    private Long objetoAprendizagemId;
+    private Atividade atividade;
+    private ObjetoAprendizagem objetoAprendizagem;
     private Long situacaoAprendizagemId;
     private Integer badgeId;
     private LocalDateTime dataBadge;
@@ -41,8 +41,8 @@ public class AcompanhamentoResponse {
                 .status(acompanhamento.getStatus())
                 .participante(ParticipanteResponse.of(acompanhamento.getParticipante()))
                 .avaliacaoConceitoId(acompanhamento.getAvaliacaoConceitoId())
-                .atividadeId(acompanhamento.getAtividadeId())
-                .objetoAprendizagemId(acompanhamento.getObjetoAprendizagemId())
+                .atividade(acompanhamento.getAtividade())
+                .objetoAprendizagem(acompanhamento.getObjetoAprendizagem())
                 .situacaoAprendizagemId(acompanhamento.getSituacaoAprendizagemId())
                 .badgeId(acompanhamento.getBadgeId())
                 .dataBadge(acompanhamento.getDataBadge())

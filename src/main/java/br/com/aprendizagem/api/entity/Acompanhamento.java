@@ -45,11 +45,14 @@ public class Acompanhamento {
     @Column(name = "avaliacao_conceito_id")
     private Integer avaliacaoConceitoId;
 
-    @Column(name = "atividade_id")
-    private Long atividadeId;
 
-    @Column(name = "objeto_aprendizagem_id")
-    private Long objetoAprendizagemId;
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
+
+    @ManyToOne
+    @JoinColumn(name = "objeto_aprendizagem_id")
+    private ObjetoAprendizagem objetoAprendizagem;
 
     @Column(name = "situacao_aprendizagem_id")
     private Long situacaoAprendizagemId;

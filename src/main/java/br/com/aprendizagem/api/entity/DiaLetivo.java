@@ -20,7 +20,7 @@ public class DiaLetivo {
     private Long id;
 
     @Column(name = "dia_letivo")
-    private LocalDateTime diaLetivo;
+    private LocalDateTime dialetivo;
 
     @Column(name = "dia_letivo_dia")
     private Integer diaLetivoDia;

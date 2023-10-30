@@ -1,10 +1,16 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.ObjetoAprendizagem;
+import br.com.aprendizagem.api.entity.Recurso;
 import br.com.aprendizagem.api.service.ObjetoAprendizagemService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +25,21 @@ public class ObjetoAprendizagemController {
     @GetMapping
     public ResponseEntity<List<ObjetoAprendizagem>> getAllObjetosAprendizagem() {
         return objetoAprendizagemService.getAllObjetosAprendizagem();
+    }
+
+    @GetMapping(value = "obterObjetoArquivoPorId/{objetoId}")
+    @ApiOperation(value = "Retorna apenas o arquivo no body.")
+    public ResponseEntity<byte[]> getArquivoObjetoById(@PathVariable Long objetoId){
+        ObjetoAprendizagem objetoAprendizagem = objetoAprendizagemService.getArquivoObjetoById(objetoId);
+        if(objetoAprendizagem != null){
+            if (objetoAprendizagem.getArquivo() != null){
+                byte[] data = objetoAprendizagem.getArquivo();
+                return ResponseEntity.ok(data);
+            }
+            return ResponseEntity.noContent().build();
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
