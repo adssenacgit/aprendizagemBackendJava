@@ -1,12 +1,19 @@
 package br.com.aprendizagem.api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "situacao_aprendizagem")
@@ -49,6 +56,15 @@ public class SituacaoAprendizagem {
     @ManyToOne
     @JoinColumn(name = "badge_id")
     private Badge badge;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "situacao_objeto_aprendizagem",
+        joinColumns = @JoinColumn(name = "situacao_aprendizagem_id"),
+        inverseJoinColumns = @JoinColumn(name = "objeto_aprendizagem_id"))
+    private Set<ObjetoAprendizagem> objetosAprendizagem = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "situacaoAprendizagem")
+    private List<Atividade> atividades;
 
 }
 

@@ -1,5 +1,7 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ public class Acompanhamento {
 
     @Lob
     @Column(name = "acompanhamento_entrega_arquivo", columnDefinition = "longblob")
-    private Blob entregaArquivo;
+    private byte[] entregaArquivo;
 
     @Column(name = "acompanhamento_inicio")
     private LocalDateTime inicio;
@@ -40,9 +42,9 @@ public class Acompanhamento {
     @JoinColumn(name = "participante_id")
     private Participante participante;
 
-    @ManyToOne
-    @JoinColumn(name = "avaliacao_conceito_id")
-    private AvaliacaoConceito avaliacaoConceito;
+    @Column(name = "avaliacao_conceito_id")
+    private Integer avaliacaoConceitoId;
+
 
     @ManyToOne
     @JoinColumn(name = "atividade_id")
@@ -52,20 +54,17 @@ public class Acompanhamento {
     @JoinColumn(name = "objeto_aprendizagem_id")
     private ObjetoAprendizagem objetoAprendizagem;
 
-    @ManyToOne
-    @JoinColumn(name = "situacao_aprendizagem_id")
-    private SituacaoAprendizagem situacaoAprendizagem;
+    @Column(name = "situacao_aprendizagem_id")
+    private Long situacaoAprendizagemId;
 
-    @ManyToOne
-    @JoinColumn(name = "badge_id")
-    private Badge badge;
+    @Column(name = "badge_id")
+    private Integer badgeId;
 
     @Column(name = "acompanhamento_data_badge")
     private LocalDateTime dataBadge;
 
-    @ManyToOne
-    @JoinColumn(name = "atividade_pergunta_resposta_id")
-    private AtividadePerguntaResposta atividadePerguntaResposta;
+    @Column(name = "atividade_pergunta_resposta_id")
+    private Long atividadePerguntaRespostaId;
 
 }
 

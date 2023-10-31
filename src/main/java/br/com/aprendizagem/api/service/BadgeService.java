@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Badge;
 import br.com.aprendizagem.api.repository.BadgeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BadgeService {
     private final BadgeRepository badgeRepository;
-    public BadgeService(BadgeRepository badgeRepository) {
-        this.badgeRepository = badgeRepository;
-    }
 
     @Transactional
     public List<Badge> getAllBadges() {

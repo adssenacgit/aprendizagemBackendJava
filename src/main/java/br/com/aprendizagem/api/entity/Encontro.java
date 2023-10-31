@@ -1,11 +1,14 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -42,4 +45,12 @@ public class Encontro {
     @ManyToOne
     @JoinColumn( name = "encontro_tipo_id")
     private EncontroTipo encontroTipo;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinTable(name = "situacao_encontro",
+            joinColumns = @JoinColumn(name = "encontro_id"),
+            inverseJoinColumns = @JoinColumn(name = "situacao_aprendizagem_id"))
+    private List<SituacaoAprendizagem> situacoesAprendizagem;
+
 }

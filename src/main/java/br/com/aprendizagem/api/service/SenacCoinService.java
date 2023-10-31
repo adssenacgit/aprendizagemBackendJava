@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SenacCoinService {
-	@Autowired
 	private SenacCoinRepository repo;
 	
 	@Transactional

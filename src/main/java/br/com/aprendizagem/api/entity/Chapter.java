@@ -1,11 +1,16 @@
 package br.com.aprendizagem.api.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Table(name = "chapter")
 public class Chapter {
     @Id
     @Column(name = "chapter_id")

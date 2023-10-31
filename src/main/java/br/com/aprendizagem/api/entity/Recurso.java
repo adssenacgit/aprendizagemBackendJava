@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +12,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Recurso {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recurso_id")
     private Long id;
 
@@ -34,6 +39,9 @@ public class Recurso {
 
     @Column(name = "recurso_status")
     private Integer status;
+
+    @Column(name = "recurso_tamanho")
+    private Integer tamanho;
 
     @JoinColumn(name = "usuario_id")
     @ManyToOne

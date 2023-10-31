@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ModuloService {
     
-    @Autowired
-    private UnidadeCurricularRepository unidadeCurricularRepository; 
+    private UnidadeCurricularRepository unidadeCurricularRepository;
 
 }
