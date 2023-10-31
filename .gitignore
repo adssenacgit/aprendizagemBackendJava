@@ -34,3 +34,6 @@ build/
 
 ### Application yml ###
 .yml
+
+## Mac OS ##
+.DS_Store
