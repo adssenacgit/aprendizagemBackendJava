@@ -1,4 +1,4 @@
-package br.com.empresa.api;
+package br.com.aprendizagem.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
