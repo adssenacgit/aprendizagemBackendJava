@@ -10,4 +10,6 @@ public interface ChapterAssuntoRepository extends JpaRepository<ChapterAssunto, 
 
     @Query("SELECT ca FROM ChapterAssunto ca WHERE ca.status = 1")
     List<ChapterAssunto> getAllChapterAssunto();
+
+    List<ChapterAssunto> findByChapterId(Integer chapterId);
 }

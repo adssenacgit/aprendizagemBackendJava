@@ -36,6 +36,11 @@ public class ChapterAssuntoController {
         }
     }
 
+    @GetMapping("/filtrar-chapter-assuntos-por-chapter-id/{chapterId}")
+    public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId){
+        return chapterAssuntoService.filterChapterAssuntosByChapterId(chapterId);
+    }
+
     @PostMapping()
     public ResponseEntity<ChapterAssunto> postChapterAssunto(@RequestBody ChapterAssunto chapterAssunto) {
         try {
