@@ -85,6 +85,7 @@ public class AcompanhamentoService {
         return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
     }
 
+    @Transactional
     public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByGrupoIdByEstudanteIdByAtividadeId(Long grupoId, Long estudanteId, Long atividadeId) {
         List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndAtividade_Id(grupoId, estudanteId, atividadeId);
         if(acompanhamentos.isEmpty()) {
@@ -93,6 +94,7 @@ public class AcompanhamentoService {
         return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
     }
 
+    @Transactional
     public ResponseEntity<List<AcompanhamentoResponse>> getAcompanhamentosResponseByGrupoIdByEstudanteIdByObjetoId(Long grupoId, Long estudanteId, Long objetoId) {
         List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndObjetoAprendizagem_Id(grupoId, estudanteId, objetoId);
         if(acompanhamentos.isEmpty()) {
@@ -100,4 +102,11 @@ public class AcompanhamentoService {
         }
         return ResponseEntity.ok(AcompanhamentoResponse.of(acompanhamentos));
     }
+
+    @Transactional
+    public Integer getTotalAcompanhamentosByParticipanteId(Long participanteId) {
+        return acompanhamentoRepository.countByParticipante_Id(participanteId);
+    }
+
+
 }

@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
@@ -51,6 +49,21 @@ public class EncontroService {
         }
         return ResponseEntity.ok(encontroEstudanteResponses);
 
+    }
+
+    @Transactional
+    public Map<String, Integer> getNumeroObjetosAtividadesByEncontroId(Long encontroId){
+        Integer totalAtividades = encontroRepository.countAtividadeByEncontroId(encontroId);
+        Integer totalObjetos = encontroRepository.countObjetoAprendizagemByEncontroId(encontroId);
+        Map<String, Integer> totalObjetosAtividades = new HashMap<>();
+        totalObjetosAtividades.put("totalAtividades", totalAtividades);
+        totalObjetosAtividades.put("totalObjetos", totalObjetos);
+        return totalObjetosAtividades;
+    }
+
+    @Transactional
+    public List<Encontro> getEncontrosListByGrupoId(Long grupoId){
+        return encontroRepository.findByGrupoId(grupoId).orElse(null);
     }
 
 //    @Transactional

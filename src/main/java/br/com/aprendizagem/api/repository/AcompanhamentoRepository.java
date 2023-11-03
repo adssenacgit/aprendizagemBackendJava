@@ -22,4 +22,6 @@ public interface AcompanhamentoRepository extends JpaRepository<Acompanhamento, 
     List<Acompanhamento> findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndAtividade_Id(Long grupoId, Long estudanteId, Long atividadeId);
 
     List<Acompanhamento> findByParticipante_Grupo_IdAndParticipante_Estudante_IdAndObjetoAprendizagem_Id(Long grupoId, Long estudanteId, Long objetoId);
+
+    Integer countByParticipante_Id(Long participanteId);
 }

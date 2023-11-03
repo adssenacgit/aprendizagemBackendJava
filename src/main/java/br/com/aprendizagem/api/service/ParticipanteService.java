@@ -28,4 +28,13 @@ public class ParticipanteService {
     public List<Participante> getParcipantesByEstudanteId(Long estudanteId){
         return participanteRepository.findByEstudanteId(estudanteId);
     }
+
+    @Transactional
+    public Long getParcipanteIdByGrupoIdByEstudanteId(Long grupoId, Long estudanteId){
+        Participante participante = participanteRepository.findByGrupo_IdAndEstudante_Id(grupoId, estudanteId);
+        if( participante != null ){
+            return participante.getId();
+        }
+        return null;
+    }
 }
