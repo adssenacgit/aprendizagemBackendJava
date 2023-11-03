@@ -33,6 +33,11 @@ public class ParticipanteController {
         }
         return ResponseEntity.ok(ParticipanteResponse.of(participantes));
     }
+
+    @GetMapping("filtrar-participantes-por-grupo-id/{grupoId}")
+    public ResponseEntity<List<ParticipanteResponse>> getParticipantesByGrupoId(@PathVariable Long grupoId) {
+        return participanteService.getParticipantesByGrupoId(grupoId);
+    }
 }
 
 

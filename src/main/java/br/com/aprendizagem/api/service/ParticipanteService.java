@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Participante;
 import br.com.aprendizagem.api.repository.ParticipanteRepository;
+import br.com.aprendizagem.api.response.ParticipanteResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,14 @@ public class ParticipanteService {
             return participante.getId();
         }
         return null;
+    }
+
+    @Transactional
+    public ResponseEntity<List<ParticipanteResponse>> getParticipantesByGrupoId(Long grupoId) {
+        List<Participante> participantes = participanteRepository.findByGrupo_Id(grupoId);
+        if (participantes.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ParticipanteResponse.of(participantes));
     }
 }
