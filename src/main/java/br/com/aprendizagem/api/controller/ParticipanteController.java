@@ -38,6 +38,11 @@ public class ParticipanteController {
     public ResponseEntity<List<ParticipanteResponse>> getParticipantesByGrupoId(@PathVariable Long grupoId) {
         return participanteService.getParticipantesByGrupoId(grupoId);
     }
+
+    @GetMapping("filtrar-participante-por-estudante-id-por-grupo-id/{estudanteId}/{grupoId}")
+    public ResponseEntity<ParticipanteResponse> getParticipanteByEstudanteIdByGrupoId(@PathVariable Long estudanteId, @PathVariable Long grupoId) {
+        return participanteService.getParticipanteByEstudanteIdByGrupoId(estudanteId, grupoId);
+    }
 }
 
 

@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.Acompanhamento;
+import br.com.aprendizagem.api.request.AcompanhamentoRequest;
 import br.com.aprendizagem.api.response.AcompanhamentoResponse;
 import br.com.aprendizagem.api.service.AcompanhamentoService;
 import lombok.AllArgsConstructor;
@@ -52,5 +53,10 @@ public class AcompanhamentoController {
     @PostMapping
     public ResponseEntity<Acompanhamento> postAcompanhamento(@RequestBody Acompanhamento acompanhamento) {
         return ResponseEntity.ok(acompanhamentoService.postAcompanhamento(acompanhamento));
+    }
+
+    @PostMapping ("simple")
+    public ResponseEntity<Acompanhamento> createAcompanhamento(@RequestBody AcompanhamentoRequest acompanhamentoRequest) {
+        return acompanhamentoService.createAcompanhamento(acompanhamentoRequest);
     }
 }
