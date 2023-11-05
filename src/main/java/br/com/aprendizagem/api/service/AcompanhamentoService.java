@@ -112,7 +112,7 @@ public class AcompanhamentoService {
 
     @Transactional
     public Integer getTotalAcompanhamentosByParticipanteId(Long participanteId) {
-        return acompanhamentoRepository.countByParticipante_Id(participanteId);
+        return acompanhamentoRepository.countActiveByParticipanteId(participanteId);
     }
 
     @Transactional
