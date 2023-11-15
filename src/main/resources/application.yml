@@ -5,7 +5,7 @@ auth0:
 spring:
   datasource:
     password: adsads
-    url: jdbc:mysql://jira.senacrio.com.br:3306/bdacompanhamento?useTimezone=true&serverTimezone=America/Sao_Paulo
+    url: jdbc:mysql://jiraedu.rj.senac.br:3306/bdacompanhamento?useTimezone=true&serverTimezone=America/Sao_Paulo
     username: ads
   jpa:
     hibernate:
