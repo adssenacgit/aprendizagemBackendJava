@@ -1,16 +1,12 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.ChapterAssunto;
-import br.com.aprendizagem.api.entity.ChapterTag;
 import br.com.aprendizagem.api.service.ChapterAssuntoService;
-import br.com.aprendizagem.api.service.ChapterTagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -51,15 +47,4 @@ public class ChapterAssuntoController {
         }
     }
 
-    @PostMapping("{id}/associar-tags")
-    public ResponseEntity<Void> associarTagAAssunto(@PathVariable Integer id, @RequestBody List<Integer> tagIds) {
-        ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoWithTags(id);
-        if (chapterAssunto != null) {
-            chapterAssuntoService.associarTagAAssunto(chapterAssunto, tagIds);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
-    }
 }
