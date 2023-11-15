@@ -38,7 +38,7 @@ public class Modulo {
     @JoinColumn(name = "oferta_id", nullable = false)
 	@JsonIgnore
 	private Oferta oferta;	
-	
-	@OneToMany(mappedBy = "modulo")
-    private Set<UnidadeCurricular> unidadeCurricular;
+
+//	@OneToMany(mappedBy = "modulo")
+//    private Set<UnidadeCurricular> unidadeCurricular;
 }

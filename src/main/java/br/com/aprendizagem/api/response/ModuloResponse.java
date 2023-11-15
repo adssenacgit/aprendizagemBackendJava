@@ -26,7 +26,7 @@ public class ModuloResponse {
     private String descricao;
     private int cargaHoraria;
     private Oferta oferta;
-    private Set<UnidadeCurricular> unidadeCurricular;
+//    private Set<UnidadeCurricular> unidadeCurricular;
 
     public static ModuloResponse of(Modulo modulo) {
         return ModuloResponse.builder()
@@ -34,7 +34,7 @@ public class ModuloResponse {
                 .descricao(modulo.getDescricao())
                 .cargaHoraria(modulo.getCargaHoraria())
                 .oferta(modulo.getOferta())
-                .unidadeCurricular(modulo.getUnidadeCurricular())
+//                .unidadeCurricular(modulo.getUnidadeCurricular())
                 .build();
     }
 

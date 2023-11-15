@@ -27,4 +27,8 @@ public class ObjetoAprendizagemService {
     public ObjetoAprendizagem getArquivoObjetoById(Long id) {
         return objetoAprendizagemRepository.findById(id).orElse(null);
     }
+
+    public ObjetoAprendizagem getObjetoAprendizagemById(Long objetoAprendizagemId) {
+        return objetoAprendizagemRepository.findById(objetoAprendizagemId).orElse(null);
+    }
 }

@@ -5,6 +5,7 @@ import br.com.aprendizagem.api.service.ProfessorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,10 @@ public class ProfessorController {
         if (professores.isEmpty())
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(professores);
+    }
+
+    @GetMapping("filtrar-professor-por-usuario-id/{usuarioId}")
+    public ResponseEntity<Professor> getProfessorByUsuarioId(@PathVariable String usuarioId){
+        return professorService.getProfessorByUsuarioId(usuarioId);
     }
 }

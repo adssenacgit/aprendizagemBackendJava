@@ -51,7 +51,7 @@ public class GrupoService {
 
     @Transactional
     public List<Grupo> getGruposByPeriodoAtivoByProfessorId(Long professorId) {
-        return filterActive(grupoRepository.getGruposByProfessorId(professorId));
+        return filterActive(grupoRepository.getGruposByPeriodoAtivoByProfessorId(professorId));
     }
 
     public List<Grupo> filterActive(List<Grupo> grupos) {

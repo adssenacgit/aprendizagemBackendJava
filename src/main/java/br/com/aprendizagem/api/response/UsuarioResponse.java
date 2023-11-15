@@ -21,6 +21,9 @@ public class UsuarioResponse {
 	private String apelido;
 	private String email;
 	private LocalDateTime dataNascimento;
+	private String telefone;
+	private LocalDateTime dataCadastro;
+	private byte[] foto;
 	private Integer status;
 	
 	public static UsuarioResponse of(Usuario usuario) {
@@ -31,6 +34,9 @@ public class UsuarioResponse {
 				.apelido(usuario.getApelido())
 				.email(usuario.getEmail())
 				.dataNascimento(usuario.getDataNascimento())
+				.telefone(usuario.getTelefone())
+				.dataCadastro(usuario.getDataCadastro())
+				.foto(usuario.getFoto())
 				.status(usuario.getStatus())
 				.build();
 	}

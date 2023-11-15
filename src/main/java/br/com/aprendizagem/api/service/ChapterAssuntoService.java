@@ -33,4 +33,13 @@ public class ChapterAssuntoService {
     public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
         return chapterAssuntoRepository.save(chapterAssunto);
     }
+    @Transactional
+    public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(Integer chapterId) {
+        List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.findByChapterId(chapterId);
+        if (!chapterAssuntos.isEmpty()) {
+            return ResponseEntity.ok(chapterAssuntos);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
