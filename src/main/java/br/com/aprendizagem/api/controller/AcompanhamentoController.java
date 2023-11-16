@@ -27,7 +27,7 @@ public class AcompanhamentoController {
         if (acompanhamento == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(acompanhamento);
+        return ResponseEntity.ok().body(acompanhamento);
     }
 
     @GetMapping("filtrarByGrupoIdByEstudanteId/{grupoId}/{estudanteId}")
