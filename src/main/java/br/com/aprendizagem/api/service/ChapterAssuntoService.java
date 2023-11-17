@@ -44,14 +44,6 @@ public class ChapterAssuntoService {
         }
     }
 
-    @Transactional
-    public Integer getTotalComentariosById(Integer id) {
-        ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
-        if (chapterAssunto != null) {
-            return chapterAssunto.getTotalComentarios();
-        }
-        return 0;
-    }
 }
 
 

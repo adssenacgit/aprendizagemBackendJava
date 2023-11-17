@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -37,4 +38,16 @@ public class ChapterAssuntoComentario {
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChapterAssuntoComentario that = (ChapterAssuntoComentario) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -47,10 +47,5 @@ public class ChapterAssuntoController {
         }
     }
 
-    @GetMapping("/{id}/total-comentarios")
-    public ResponseEntity<Integer> getTotalComentariosById(@PathVariable Integer id) {
-        Integer totalComentarios = chapterAssuntoService.getTotalComentariosById(id);
-        return ResponseEntity.ok().body(totalComentarios);
-    }
 
 }

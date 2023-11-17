@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -66,19 +63,8 @@ public class ChapterAssunto {
     private Set<ChapterTag> tags = new HashSet<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "chapterAssunto", fetch = FetchType.EAGER)
-    private List<ChapterAssuntoComentario> comentarios = new ArrayList<>();
-
-    public Integer getTotalComentarios() {
-        List<ChapterAssuntoComentario> totalSemDuplicatas = new ArrayList<>();
-        for (ChapterAssuntoComentario comentario : comentarios) {
-            if (!totalSemDuplicatas.contains(comentario)) {
-                totalSemDuplicatas.add(comentario);
-            }
-        }
-        return totalSemDuplicatas.size();
-    }
-
+    @OneToMany(mappedBy = "chapterAssunto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<ChapterAssuntoComentario> comentarios = new HashSet<>();
 
 }
 //chapter_assunto_id
