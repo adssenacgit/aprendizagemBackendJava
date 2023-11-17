@@ -25,7 +25,7 @@ public class ChapterAssuntoService {
     }
 
     @Transactional
-    public ChapterAssunto getChapterAssuntoWithTags(Integer id) {
+    public ChapterAssunto getChapterAssuntoById(Integer id) {
         return chapterAssuntoRepository.findById(id).orElse(null);
     }
 
@@ -33,6 +33,7 @@ public class ChapterAssuntoService {
     public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
         return chapterAssuntoRepository.save(chapterAssunto);
     }
+
     @Transactional
     public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(Integer chapterId) {
         List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.findByChapterId(chapterId);
@@ -42,4 +43,35 @@ public class ChapterAssuntoService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @Transactional
+    public Integer getTotalComentariosById(Integer id) {
+        ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
+        if (chapterAssunto != null) {
+            return chapterAssunto.getTotalComentarios();
+        }
+        return 0;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class ChapterAssuntoComentario {
     private LocalDateTime data;
     @Column(name = "chapter_assunto_comentario_verificacao")
     private Integer verificacao;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "chapter_assunto_id")
     private ChapterAssunto chapterAssunto;
@@ -34,6 +36,5 @@ public class ChapterAssuntoComentario {
     @ManyToOne
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
-
 
 }

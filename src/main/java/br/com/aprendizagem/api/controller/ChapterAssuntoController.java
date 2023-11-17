@@ -23,8 +23,8 @@ public class ChapterAssuntoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChapterAssunto> getChapterAssuntoWithTags(@PathVariable Integer id) {
-        ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoWithTags(id);
+    public ResponseEntity<ChapterAssunto> getChapterAssuntoById(@PathVariable Integer id) {
+        ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoById(id);
         if (chapterAssunto != null) {
             return ResponseEntity.ok(chapterAssunto);
         } else {
@@ -45,6 +45,12 @@ public class ChapterAssuntoController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/{id}/total-comentarios")
+    public ResponseEntity<Integer> getTotalComentariosById(@PathVariable Integer id) {
+        Integer totalComentarios = chapterAssuntoService.getTotalComentariosById(id);
+        return ResponseEntity.ok().body(totalComentarios);
     }
 
 }

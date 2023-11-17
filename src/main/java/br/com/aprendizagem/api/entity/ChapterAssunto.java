@@ -1,5 +1,7 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -62,6 +64,20 @@ public class ChapterAssunto {
             joinColumns = @JoinColumn(name = "chapter_assunto_id"),
             inverseJoinColumns = @JoinColumn(name = "chapter_tag_id"))
     private Set<ChapterTag> tags = new HashSet<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "chapterAssunto", fetch = FetchType.EAGER)
+    private List<ChapterAssuntoComentario> comentarios = new ArrayList<>();
+
+    public Integer getTotalComentarios() {
+        List<ChapterAssuntoComentario> totalSemDuplicatas = new ArrayList<>();
+        for (ChapterAssuntoComentario comentario : comentarios) {
+            if (!totalSemDuplicatas.contains(comentario)) {
+                totalSemDuplicatas.add(comentario);
+            }
+        }
+        return totalSemDuplicatas.size();
+    }
 
 
 }
