@@ -34,5 +34,10 @@ public class SituacaoAprendizagemController {
     public ResponseEntity<List<SituacaoAprendizagem>> getSituacoesAprendizagemByEncontroId(@PathVariable Long encontroId) {
         return situacaoAprendizagemService.getSituacoesAprendizagemByEncontroId(encontroId);
     }
+
+    @GetMapping("filtrarSituacoesAprendizagemPorPlanejamentoUcId/{planejamentoUcId}")
+    public ResponseEntity<List<SituacaoAprendizagemResponse>> getSituacoesAprendizagemByPlanejamentoUcId(@PathVariable Long planejamentoUcId) {
+        return situacaoAprendizagemService.getSituacoesAprendizagemByPlanejamentoUcId(planejamentoUcId);
+    }
 }
 

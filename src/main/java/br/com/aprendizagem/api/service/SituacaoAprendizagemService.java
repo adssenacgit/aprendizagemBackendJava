@@ -42,4 +42,13 @@ public class SituacaoAprendizagemService {
     public ResponseEntity<List<SituacaoAprendizagem>> getSituacoesAprendizagemByEncontroId(Long encontroId) {
        return situacaoEncontroService.getSituacoesAprendizagemByEncontroId(encontroId);
     }
+
+    @Transactional
+    public ResponseEntity<List<SituacaoAprendizagemResponse>> getSituacoesAprendizagemByPlanejamentoUcId(Long planejamentoUcId) {
+        List<SituacaoAprendizagem> situacoes = situacaoAprendizagemRepository.findByPlanejamentoUc_Id(planejamentoUcId);
+        if(situacoes.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(SituacaoAprendizagemResponse.of(situacoes));
+    }
 }
