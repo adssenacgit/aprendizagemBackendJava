@@ -1,5 +1,6 @@
 package br.com.aprendizagem.api.controller;
 
+import br.com.aprendizagem.api.DTO.ChapterAssuntoDTO;
 import br.com.aprendizagem.api.entity.ChapterAssunto;
 import br.com.aprendizagem.api.service.ChapterAssuntoService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,11 @@ public class ChapterAssuntoController {
         return chapterAssuntoService.getAllChapterAssunto();
     }
 
+    @GetMapping("/with-total-comentarios")
+    public ResponseEntity<List<ChapterAssuntoDTO>> getAllChapterAssuntoWithTotalComentarios() {
+        return chapterAssuntoService.getAllChapterAssuntoWithTotalComentarios();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ChapterAssunto> getChapterAssuntoById(@PathVariable Integer id) {
         ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoById(id);
@@ -32,8 +38,18 @@ public class ChapterAssuntoController {
         }
     }
 
+    @GetMapping("/{id}/with-total-comentarios")
+    public ResponseEntity<ChapterAssuntoDTO> getChapterAssuntoByIdWithTotalComentarios(@PathVariable Integer id) {
+        ChapterAssuntoDTO chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoByIdWithTotalComentarios(id);
+        if (chapterAssuntoDTO != null) {
+            return ResponseEntity.ok().body(chapterAssuntoDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/filtrar-chapter-assuntos-por-chapter-id/{chapterId}")
-    public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId){
+    public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId) {
         return chapterAssuntoService.filterChapterAssuntosByChapterId(chapterId);
     }
 

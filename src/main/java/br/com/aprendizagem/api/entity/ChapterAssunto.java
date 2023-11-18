@@ -66,6 +66,8 @@ public class ChapterAssunto {
     @OneToMany(mappedBy = "chapterAssunto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ChapterAssuntoComentario> comentarios = new HashSet<>();
 
+
+
 }
 //chapter_assunto_id
 //chapter_assunto_data_cadastro
