@@ -1,13 +1,16 @@
 package br.com.aprendizagem.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,8 +24,9 @@ public class ChapterAssuntoComentario {
     @Lob
     @Column(name = "chapter_assunto_comentario_texto", columnDefinition = "TEXT")
     private String texto;
-    @Column(name = "chapter_assunto_comentario_pai")
-    private Long pai;
+    @ManyToOne
+    @JoinColumn(name = "chapter_assunto_comentario_pai")
+    private ChapterAssuntoComentario comentarioPai;
     @Column(name = "chapter_assunto_comentario_data")
     private LocalDateTime data;
     @Column(name = "chapter_assunto_comentario_verificacao")
@@ -37,6 +41,9 @@ public class ChapterAssuntoComentario {
     @ManyToOne
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "chapterAssuntoComentario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Curtida> curtidas = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

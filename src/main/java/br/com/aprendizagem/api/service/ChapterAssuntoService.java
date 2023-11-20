@@ -1,7 +1,9 @@
 package br.com.aprendizagem.api.service;
 
-import br.com.aprendizagem.api.DTO.ChapterAssuntoDTO;
+import br.com.aprendizagem.api.DTO.ChapterAssuntoComentariosPaiDto;
+import br.com.aprendizagem.api.DTO.ChapterAssuntoTotalCurtidasDto;
 import br.com.aprendizagem.api.entity.ChapterAssunto;
+import br.com.aprendizagem.api.entity.ChapterAssuntoComentario;
 import br.com.aprendizagem.api.repository.ChapterAssuntoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ public class ChapterAssuntoService {
 
     private final ChapterAssuntoRepository chapterAssuntoRepository;
 
+    private final ChapterAssuntoComentarioService chapterAssuntoComentarioService;
+
     @Transactional
     public ResponseEntity<List<ChapterAssunto>> getAllChapterAssunto() {
         List<ChapterAssunto> assuntos = chapterAssuntoRepository.getAllChapterAssunto();
@@ -26,6 +30,19 @@ public class ChapterAssuntoService {
         return ResponseEntity.ok(assuntos);
     }
 
+    @Transactional
+    public ResponseEntity<List<ChapterAssuntoComentariosPaiDto>> getAllChapterAssuntoWithComentariosPai() {
+        List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.getAllChapterAssunto();
+        List<ChapterAssuntoComentariosPaiDto> chapterAssuntoDtos = new ArrayList<>();
+        for (ChapterAssunto chapterAssunto : chapterAssuntos) {
+            ChapterAssuntoComentariosPaiDto chapterAssuntoDTO = new ChapterAssuntoComentariosPaiDto();
+            buildDto(chapterAssunto, chapterAssuntoDTO);
+            chapterAssuntoDTO.setComentariosPais(chapterAssuntoComentarioService.findAllComentarioPaiByChapterAssuntoId(chapterAssunto.getId()));
+            chapterAssuntoDtos.add(chapterAssuntoDTO);
+        }
+        return ResponseEntity.ok().body(chapterAssuntoDtos);
+    }
+
 
     @Transactional
     public ChapterAssunto getChapterAssuntoById(Integer id) {
@@ -33,13 +50,25 @@ public class ChapterAssuntoService {
     }
 
     @Transactional
-    public ChapterAssuntoDTO getChapterAssuntoByIdWithTotalComentarios(Integer id) {
+    public ChapterAssuntoTotalCurtidasDto getChapterAssuntoByIdWithTotalComentarios(Integer id) {
         ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
-        ChapterAssuntoDTO chapterAssuntoDTO = new ChapterAssuntoDTO();
+        ChapterAssuntoTotalCurtidasDto chapterAssuntoDTO = new ChapterAssuntoTotalCurtidasDto();
         if (chapterAssunto != null) {
-            buildDTO(chapterAssunto, chapterAssuntoDTO);
+            buildDto(chapterAssunto, chapterAssuntoDTO);
+            chapterAssuntoDTO.setTotalComentarios(chapterAssunto.getComentarios().size());
         }
 
+        return chapterAssuntoDTO;
+    }
+
+    @Transactional
+    public ChapterAssuntoComentariosPaiDto getChapterAssuntoByIdWithComentariosPai(Integer id) {
+        ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
+        ChapterAssuntoComentariosPaiDto chapterAssuntoDTO = new ChapterAssuntoComentariosPaiDto();
+        if (chapterAssunto != null) {
+            buildDto(chapterAssunto, chapterAssuntoDTO);
+            chapterAssuntoDTO.setComentariosPais(chapterAssuntoComentarioService.findAllComentarioPai());
+        }
         return chapterAssuntoDTO;
     }
 
@@ -60,18 +89,40 @@ public class ChapterAssuntoService {
     }
 
     @Transactional
-    public ResponseEntity<List<ChapterAssuntoDTO>> getAllChapterAssuntoWithTotalComentarios() {
+    public ResponseEntity<List<ChapterAssuntoTotalCurtidasDto>> getAllChapterAssuntoWithTotalComentarios() {
         List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.getAllChapterAssunto();
-        List<ChapterAssuntoDTO> chapterAssuntoDTOS = new ArrayList<>();
+        List<ChapterAssuntoTotalCurtidasDto> chapterAssuntoDtos = new ArrayList<>();
         for (ChapterAssunto chapterAssunto : chapterAssuntos) {
-            ChapterAssuntoDTO chapterAssuntoDTO = new ChapterAssuntoDTO();
-            buildDTO(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDTOS.add(chapterAssuntoDTO);
+            ChapterAssuntoTotalCurtidasDto chapterAssuntoDTO = new ChapterAssuntoTotalCurtidasDto();
+            buildDto(chapterAssunto, chapterAssuntoDTO);
+            chapterAssuntoDTO.setTotalComentarios(chapterAssunto.getComentarios().size());
+            chapterAssuntoDtos.add(chapterAssuntoDTO);
         }
-        return ResponseEntity.ok().body(chapterAssuntoDTOS);
+        return ResponseEntity.ok().body(chapterAssuntoDtos);
     }
 
-    private void buildDTO(ChapterAssunto chapterAssunto, ChapterAssuntoDTO chapterAssuntoDTO) {
+    public void deleteChapterAssunto(Integer id) {
+        chapterAssuntoRepository.deleteById(id);
+    }
+
+    private void buildDto(ChapterAssunto chapterAssunto, ChapterAssuntoTotalCurtidasDto chapterAssuntoDto) {
+        chapterAssuntoDto.setId(chapterAssunto.getId());
+        chapterAssuntoDto.setDataCadastro(chapterAssunto.getDataCadastro());
+        chapterAssuntoDto.setTitulo(chapterAssunto.getTitulo());
+        chapterAssuntoDto.setDescricao(chapterAssunto.getDescricao());
+        chapterAssuntoDto.setImagem(chapterAssunto.getImagem());
+        chapterAssuntoDto.setContadorVisualizacao(chapterAssunto.getContadorVisualizacao());
+        chapterAssuntoDto.setStatus(chapterAssunto.getStatus());
+        chapterAssuntoDto.setVerificacao(chapterAssunto.getVerificacao());
+        chapterAssuntoDto.setChapter(chapterAssunto.getChapter());
+        chapterAssuntoDto.setUsuario(chapterAssunto.getUsuario());
+        chapterAssuntoDto.setUsuarioVerificacao(chapterAssunto.getUsuarioVerificacao());
+        chapterAssuntoDto.setTags(chapterAssunto.getTags());
+
+
+    }
+
+    private void buildDto(ChapterAssunto chapterAssunto, ChapterAssuntoComentariosPaiDto chapterAssuntoDTO) {
         chapterAssuntoDTO.setId(chapterAssunto.getId());
         chapterAssuntoDTO.setDataCadastro(chapterAssunto.getDataCadastro());
         chapterAssuntoDTO.setTitulo(chapterAssunto.getTitulo());
@@ -84,8 +135,6 @@ public class ChapterAssuntoService {
         chapterAssuntoDTO.setUsuario(chapterAssunto.getUsuario());
         chapterAssuntoDTO.setUsuarioVerificacao(chapterAssunto.getUsuarioVerificacao());
         chapterAssuntoDTO.setTags(chapterAssunto.getTags());
-        chapterAssuntoDTO.setTotalComentarios(chapterAssunto.getComentarios().size());
-
     }
 }
 

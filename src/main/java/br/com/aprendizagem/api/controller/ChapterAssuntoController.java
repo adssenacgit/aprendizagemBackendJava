@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.controller;
 
-import br.com.aprendizagem.api.DTO.ChapterAssuntoDTO;
+import br.com.aprendizagem.api.DTO.ChapterAssuntoComentariosPaiDto;
+import br.com.aprendizagem.api.DTO.ChapterAssuntoTotalCurtidasDto;
 import br.com.aprendizagem.api.entity.ChapterAssunto;
 import br.com.aprendizagem.api.service.ChapterAssuntoService;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class ChapterAssuntoController {
     }
 
     @GetMapping("/with-total-comentarios")
-    public ResponseEntity<List<ChapterAssuntoDTO>> getAllChapterAssuntoWithTotalComentarios() {
+    public ResponseEntity<List<ChapterAssuntoTotalCurtidasDto>> getAllChapterAssuntoWithTotalComentarios() {
         return chapterAssuntoService.getAllChapterAssuntoWithTotalComentarios();
     }
 
@@ -38,9 +39,24 @@ public class ChapterAssuntoController {
         }
     }
 
+    @GetMapping("/with-comentarios-pai")
+    public ResponseEntity<List<ChapterAssuntoComentariosPaiDto>> getAllChapterAssuntoWithComentariosPai() {
+        return chapterAssuntoService.getAllChapterAssuntoWithComentariosPai();
+    }
+
+    @GetMapping("/with-comentarios-pai/{id}")
+    public ResponseEntity<ChapterAssuntoComentariosPaiDto> getChapterAssuntoByIdWithComentariosPai(@PathVariable Integer id) {
+        ChapterAssuntoComentariosPaiDto chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoByIdWithComentariosPai(id);
+        if (chapterAssuntoDTO != null) {
+            return ResponseEntity.ok().body(chapterAssuntoDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/{id}/with-total-comentarios")
-    public ResponseEntity<ChapterAssuntoDTO> getChapterAssuntoByIdWithTotalComentarios(@PathVariable Integer id) {
-        ChapterAssuntoDTO chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoByIdWithTotalComentarios(id);
+    public ResponseEntity<ChapterAssuntoTotalCurtidasDto> getChapterAssuntoByIdWithTotalComentarios(@PathVariable Integer id) {
+        ChapterAssuntoTotalCurtidasDto chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoByIdWithTotalComentarios(id);
         if (chapterAssuntoDTO != null) {
             return ResponseEntity.ok().body(chapterAssuntoDTO);
         } else {
