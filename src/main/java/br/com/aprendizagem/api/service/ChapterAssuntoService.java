@@ -1,9 +1,7 @@
 package br.com.aprendizagem.api.service;
 
-import br.com.aprendizagem.api.DTO.ChapterAssuntoComentariosPaiDto;
-import br.com.aprendizagem.api.DTO.ChapterAssuntoTotalCurtidasDto;
+import br.com.aprendizagem.api.DTO.ChapterAssuntoDto;
 import br.com.aprendizagem.api.entity.ChapterAssunto;
-import br.com.aprendizagem.api.entity.ChapterAssuntoComentario;
 import br.com.aprendizagem.api.repository.ChapterAssuntoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +29,12 @@ public class ChapterAssuntoService {
     }
 
     @Transactional
-    public ResponseEntity<List<ChapterAssuntoComentariosPaiDto>> getAllChapterAssuntoWithComentariosPai() {
+    public ResponseEntity<List<ChapterAssuntoDto>> getAllChapterAssuntoIgnoreComentarios() {
         List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.getAllChapterAssunto();
-        List<ChapterAssuntoComentariosPaiDto> chapterAssuntoDtos = new ArrayList<>();
+        List<ChapterAssuntoDto> chapterAssuntoDtos = new ArrayList<>();
         for (ChapterAssunto chapterAssunto : chapterAssuntos) {
-            ChapterAssuntoComentariosPaiDto chapterAssuntoDTO = new ChapterAssuntoComentariosPaiDto();
+            ChapterAssuntoDto chapterAssuntoDTO = new ChapterAssuntoDto();
             buildDto(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDTO.setComentariosPais(chapterAssuntoComentarioService.findAllComentarioPaiByChapterAssuntoId(chapterAssunto.getId()));
             chapterAssuntoDtos.add(chapterAssuntoDTO);
         }
         return ResponseEntity.ok().body(chapterAssuntoDtos);
@@ -45,29 +42,11 @@ public class ChapterAssuntoService {
 
 
     @Transactional
-    public ChapterAssunto getChapterAssuntoById(Integer id) {
-        return chapterAssuntoRepository.findById(id).orElse(null);
-    }
-
-    @Transactional
-    public ChapterAssuntoTotalCurtidasDto getChapterAssuntoByIdWithTotalComentarios(Integer id) {
+    public ChapterAssuntoDto getChapterAssuntoById(Integer id) {
         ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
-        ChapterAssuntoTotalCurtidasDto chapterAssuntoDTO = new ChapterAssuntoTotalCurtidasDto();
+        ChapterAssuntoDto chapterAssuntoDTO = new ChapterAssuntoDto();
         if (chapterAssunto != null) {
             buildDto(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDTO.setTotalComentarios(chapterAssunto.getComentarios().size());
-        }
-
-        return chapterAssuntoDTO;
-    }
-
-    @Transactional
-    public ChapterAssuntoComentariosPaiDto getChapterAssuntoByIdWithComentariosPai(Integer id) {
-        ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
-        ChapterAssuntoComentariosPaiDto chapterAssuntoDTO = new ChapterAssuntoComentariosPaiDto();
-        if (chapterAssunto != null) {
-            buildDto(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDTO.setComentariosPais(chapterAssuntoComentarioService.findAllComentarioPai());
         }
         return chapterAssuntoDTO;
     }
@@ -89,14 +68,14 @@ public class ChapterAssuntoService {
     }
 
     @Transactional
-    public ResponseEntity<List<ChapterAssuntoTotalCurtidasDto>> getAllChapterAssuntoWithTotalComentarios() {
+    public ResponseEntity<List<ChapterAssuntoDto>> getAllChapterAssuntoDto() {
         List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.getAllChapterAssunto();
-        List<ChapterAssuntoTotalCurtidasDto> chapterAssuntoDtos = new ArrayList<>();
+        List<ChapterAssuntoDto> chapterAssuntoDtos = new ArrayList<>();
         for (ChapterAssunto chapterAssunto : chapterAssuntos) {
-            ChapterAssuntoTotalCurtidasDto chapterAssuntoDTO = new ChapterAssuntoTotalCurtidasDto();
-            buildDto(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDTO.setTotalComentarios(chapterAssunto.getComentarios().size());
-            chapterAssuntoDtos.add(chapterAssuntoDTO);
+            ChapterAssuntoDto chapterAssuntoDto = new ChapterAssuntoDto();
+            buildDto(chapterAssunto, chapterAssuntoDto);
+            chapterAssuntoDto.setTotalComentarios(chapterAssunto.getComentarios().size());
+            chapterAssuntoDtos.add(chapterAssuntoDto);
         }
         return ResponseEntity.ok().body(chapterAssuntoDtos);
     }
@@ -105,7 +84,8 @@ public class ChapterAssuntoService {
         chapterAssuntoRepository.deleteById(id);
     }
 
-    private void buildDto(ChapterAssunto chapterAssunto, ChapterAssuntoTotalCurtidasDto chapterAssuntoDto) {
+
+    private void buildDto(ChapterAssunto chapterAssunto, ChapterAssuntoDto chapterAssuntoDto) {
         chapterAssuntoDto.setId(chapterAssunto.getId());
         chapterAssuntoDto.setDataCadastro(chapterAssunto.getDataCadastro());
         chapterAssuntoDto.setTitulo(chapterAssunto.getTitulo());
@@ -114,27 +94,14 @@ public class ChapterAssuntoService {
         chapterAssuntoDto.setContadorVisualizacao(chapterAssunto.getContadorVisualizacao());
         chapterAssuntoDto.setStatus(chapterAssunto.getStatus());
         chapterAssuntoDto.setVerificacao(chapterAssunto.getVerificacao());
-        chapterAssuntoDto.setChapter(chapterAssunto.getChapter());
+        chapterAssuntoDto.setChapterId(chapterAssunto.getChapter().getId());
         chapterAssuntoDto.setUsuario(chapterAssunto.getUsuario());
-        chapterAssuntoDto.setUsuarioVerificacao(chapterAssunto.getUsuarioVerificacao());
+        chapterAssuntoDto.setChapterNome(chapterAssunto.getChapter().getNome());
+        if (chapterAssunto.getUsuarioVerificacao() != null) {
+            chapterAssuntoDto.setUsuarioVerificacaoId(chapterAssunto.getUsuarioVerificacao().getId());
+        }
         chapterAssuntoDto.setTags(chapterAssunto.getTags());
-
-
-    }
-
-    private void buildDto(ChapterAssunto chapterAssunto, ChapterAssuntoComentariosPaiDto chapterAssuntoDTO) {
-        chapterAssuntoDTO.setId(chapterAssunto.getId());
-        chapterAssuntoDTO.setDataCadastro(chapterAssunto.getDataCadastro());
-        chapterAssuntoDTO.setTitulo(chapterAssunto.getTitulo());
-        chapterAssuntoDTO.setDescricao(chapterAssunto.getDescricao());
-        chapterAssuntoDTO.setImagem(chapterAssunto.getImagem());
-        chapterAssuntoDTO.setContadorVisualizacao(chapterAssunto.getContadorVisualizacao());
-        chapterAssuntoDTO.setStatus(chapterAssunto.getStatus());
-        chapterAssuntoDTO.setVerificacao(chapterAssunto.getVerificacao());
-        chapterAssuntoDTO.setChapter(chapterAssunto.getChapter());
-        chapterAssuntoDTO.setUsuario(chapterAssunto.getUsuario());
-        chapterAssuntoDTO.setUsuarioVerificacao(chapterAssunto.getUsuarioVerificacao());
-        chapterAssuntoDTO.setTags(chapterAssunto.getTags());
+        chapterAssuntoDto.setTotalComentarios(chapterAssunto.getComentarios().size());
     }
 }
 

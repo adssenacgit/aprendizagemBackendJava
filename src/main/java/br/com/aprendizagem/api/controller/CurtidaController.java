@@ -35,11 +35,6 @@ public class CurtidaController {
         return ResponseEntity.ok().body(curtidaService.postCurtida(curtida));
     }
 
-    @DeleteMapping("/{usuarioId}")
-    public ResponseEntity<Void> deleteCurtida(@PathVariable String usuarioId) {
-        curtidaService.deleteByUsuarioId(usuarioId);
-        return ResponseEntity.noContent().build();
-    }
 
 
 }

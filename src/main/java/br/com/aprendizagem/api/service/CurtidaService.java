@@ -25,12 +25,14 @@ public class CurtidaService {
     }
 
     @Transactional
+    public List<Curtida> getCurtidasByComentarioId(Long comentarioId) {
+        return curtidaRepository.getCurtidasByComentarioId(comentarioId);
+    }
+
+    @Transactional
     public Curtida postCurtida(Curtida curtida) {
         return curtidaRepository.save(curtida);
     }
 
-    @Transactional
-    public void deleteByUsuarioId(String id) {
-        curtidaRepository.deleteByUsuarioId(id);
-    }
+
 }

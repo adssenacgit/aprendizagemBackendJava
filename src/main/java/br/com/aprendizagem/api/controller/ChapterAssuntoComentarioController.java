@@ -41,10 +41,20 @@ public class ChapterAssuntoComentarioController {
     }
 
     @GetMapping("/filtrar-por-chapter-assunto-id/{chapterAssuntoId}")
-    public ResponseEntity<ChapterAssuntoComentario> filterByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
-        ChapterAssuntoComentario chapterAssuntoComentario = chapterAssuntoComentarioService.filterByChapterAssuntoId(chapterAssuntoId);
+    public ResponseEntity<List<ChapterAssuntoComentario>> filterByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
+        List<ChapterAssuntoComentario> chapterAssuntoComentario = chapterAssuntoComentarioService.filterByChapterAssuntoId(chapterAssuntoId);
         if (chapterAssuntoComentario != null) {
             return ResponseEntity.ok().body(chapterAssuntoComentario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/filtrar-por-chapter-assunto-id-comentarios-pai/{chapterAssuntoId}")
+    public ResponseEntity<List<ChapterAssuntoComentario>> findAllComentarioPaiByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
+        List<ChapterAssuntoComentario> chapterAssuntoComentarios = chapterAssuntoComentarioService.findAllComentarioPaiByChapterAssuntoId(chapterAssuntoId);
+        if (chapterAssuntoComentarios != null) {
+            return ResponseEntity.ok().body(chapterAssuntoComentarios);
         } else {
             return ResponseEntity.notFound().build();
         }

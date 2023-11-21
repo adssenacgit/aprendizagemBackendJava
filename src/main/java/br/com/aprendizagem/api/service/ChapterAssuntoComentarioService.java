@@ -1,5 +1,6 @@
 package br.com.aprendizagem.api.service;
 
+import br.com.aprendizagem.api.DTO.ChapterAssuntoComentarioDto;
 import br.com.aprendizagem.api.entity.ChapterAssuntoComentario;
 import br.com.aprendizagem.api.repository.ChapterAssuntoComentarioRepository;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class ChapterAssuntoComentarioService {
         chapterAssuntoComentarioRepository.deleteById(id);
     }
 
-    public ChapterAssuntoComentario filterByChapterAssuntoId(Integer chapterAssuntoId) {
+    public List<ChapterAssuntoComentario> filterByChapterAssuntoId(Integer chapterAssuntoId) {
         return chapterAssuntoComentarioRepository.findByChapterAssuntoId(chapterAssuntoId);
     }
 
@@ -40,4 +41,7 @@ public class ChapterAssuntoComentarioService {
     public List<ChapterAssuntoComentario> findAllComentarioPaiByChapterAssuntoId(Integer chapterAssuntoId) {
         return chapterAssuntoComentarioRepository.findAllComentarioPaiByChapterAssuntoId(chapterAssuntoId);
     }
+
 }
+
+

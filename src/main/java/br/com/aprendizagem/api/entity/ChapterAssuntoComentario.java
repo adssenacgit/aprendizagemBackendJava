@@ -1,5 +1,6 @@
 package br.com.aprendizagem.api.entity;
 
+import br.com.aprendizagem.api.DTO.ChapterAssuntoComentarioDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -41,9 +42,12 @@ public class ChapterAssuntoComentario {
     @ManyToOne
     @JoinColumn(name = "usuario_id_verificacao")
     private Usuario usuarioVerificacao;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "chapterAssuntoComentario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Curtida> curtidas = new HashSet<>();
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -57,4 +61,5 @@ public class ChapterAssuntoComentario {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

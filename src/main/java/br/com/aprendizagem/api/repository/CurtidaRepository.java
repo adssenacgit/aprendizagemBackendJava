@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface CurtidaRepository extends JpaRepository<Curtida, Integer> {
 
-    @Modifying
-    @Query("DELETE FROM Curtida WHERE usuario.id = :usuarioId")
-    void deleteByUsuarioId(String usuarioId);
+
+    @Query("SELECT c FROM Curtida c WHERE c.chapterAssuntoComentario.id = :comentarioId")
+    List<Curtida> getCurtidasByComentarioId(Long comentarioId);
 
 }
