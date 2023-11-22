@@ -20,6 +20,7 @@ import java.util.Set;
 @Table(name = "chapter_assunto_comentario")
 public class ChapterAssuntoComentario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chapter_assunto_comentario_id")
     private Long id;
     @Lob

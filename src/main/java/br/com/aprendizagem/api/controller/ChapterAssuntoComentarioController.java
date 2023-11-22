@@ -1,5 +1,6 @@
 package br.com.aprendizagem.api.controller;
 
+import br.com.aprendizagem.api.DTO.ChapterAssuntoComentarioDto;
 import br.com.aprendizagem.api.entity.ChapterAssuntoComentario;
 import br.com.aprendizagem.api.service.ChapterAssuntoComentarioService;
 import lombok.AllArgsConstructor;
@@ -15,46 +16,24 @@ public class ChapterAssuntoComentarioController {
 
     private final ChapterAssuntoComentarioService chapterAssuntoComentarioService;
 
-    @GetMapping
-    public ResponseEntity<List<ChapterAssuntoComentario>> getAllChapterAssuntoComentario() {
-        return ResponseEntity.ok().body(chapterAssuntoComentarioService.getAllChapterAssuntoComentario());
+
+
+    @GetMapping()
+    public ResponseEntity<List<ChapterAssuntoComentarioDto>> getAllChapterAssuntoComentario() {
+        return ResponseEntity.ok().body(chapterAssuntoComentarioService.getAllChapterAssuntoComentarioDto());
     }
 
-    @GetMapping("/comentarios-pai")
-    public ResponseEntity<List<ChapterAssuntoComentario>> findAllComentarioPai() {
-        List<ChapterAssuntoComentario> chapterAssuntoComentarios = chapterAssuntoComentarioService.findAllComentarioPai();
-        if (chapterAssuntoComentarios != null) {
-            return ResponseEntity.ok().body(chapterAssuntoComentarios);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/comentarios-by-chapter-assunto-id/{chapterAssuntoId}")
+    public ResponseEntity<List<ChapterAssuntoComentarioDto>> getAllChapterAssuntoComentarioDtoByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
+        return ResponseEntity.ok().body(chapterAssuntoComentarioService.getAllChapterAssuntoComentarioDtoByChapterAssuntoId(chapterAssuntoId));
     }
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChapterAssuntoComentario> getChapterAssuntoComentarioById(@PathVariable Integer id) {
+    public ResponseEntity<ChapterAssuntoComentario> getChapterAssuntoComentarioById(@PathVariable Long id) {
         ChapterAssuntoComentario chapterAssuntoComentario = chapterAssuntoComentarioService.getChapterAssuntoComentarioById(id);
         if (chapterAssuntoComentario != null) {
             return ResponseEntity.ok().body(chapterAssuntoComentario);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/filtrar-por-chapter-assunto-id/{chapterAssuntoId}")
-    public ResponseEntity<List<ChapterAssuntoComentario>> filterByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
-        List<ChapterAssuntoComentario> chapterAssuntoComentario = chapterAssuntoComentarioService.filterByChapterAssuntoId(chapterAssuntoId);
-        if (chapterAssuntoComentario != null) {
-            return ResponseEntity.ok().body(chapterAssuntoComentario);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/filtrar-por-chapter-assunto-id-comentarios-pai/{chapterAssuntoId}")
-    public ResponseEntity<List<ChapterAssuntoComentario>> findAllComentarioPaiByChapterAssuntoId(@PathVariable Integer chapterAssuntoId) {
-        List<ChapterAssuntoComentario> chapterAssuntoComentarios = chapterAssuntoComentarioService.findAllComentarioPaiByChapterAssuntoId(chapterAssuntoId);
-        if (chapterAssuntoComentarios != null) {
-            return ResponseEntity.ok().body(chapterAssuntoComentarios);
         } else {
             return ResponseEntity.notFound().build();
         }

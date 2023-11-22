@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,6 +26,5 @@ public class ChapterAssuntoComentarioDto {
     private Long paiId;
     private Integer chapterAssuntoId;
     private Usuario usuario;
-    private List<Curtida> curtidas;
-    private List<ChapterAssuntoComentarioDto> filhos;
+    private Set<Curtida> curtidas;
 }
