@@ -27,7 +27,7 @@ public class ChapterAssuntoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ChapterAssuntoDto> getChapterAssuntoById(@PathVariable Integer id) {
-        ChapterAssuntoDto chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoById(id);
+        ChapterAssuntoDto chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoDtoById(id);
         if (chapterAssuntoDTO != null) {
             return ResponseEntity.ok().body(chapterAssuntoDTO);
         } else {

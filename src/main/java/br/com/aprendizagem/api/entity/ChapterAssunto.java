@@ -67,7 +67,24 @@ public class ChapterAssunto {
     private Set<ChapterAssuntoComentario> comentarios = new HashSet<>();
 
 
-
+    @Override
+    public String toString() {
+        return "ChapterAssunto{" +
+                "id=" + id +
+                ", dataCadastro=" + dataCadastro +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", imagem=" + Arrays.toString(imagem) +
+                ", contadorVisualizacao=" + contadorVisualizacao +
+                ", status=" + status +
+                ", verificacao=" + verificacao +
+                ", chapter=" + chapter +
+                ", usuario=" + usuario +
+                ", usuarioVerificacao=" + usuarioVerificacao +
+                ", tags=" + tags +
+                ", comentarios=" + comentarios +
+                '}';
+    }
 }
 //chapter_assunto_id
 //chapter_assunto_data_cadastro

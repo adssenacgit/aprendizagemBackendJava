@@ -15,6 +15,10 @@ public class ChapterAssuntoComentarioService {
 
     private final ChapterAssuntoComentarioRepository chapterAssuntoComentarioRepository;
 
+    private final ChapterAssuntoService chapterAssuntoService;
+
+    private final UsuarioService usuarioService;
+
     public List<ChapterAssuntoComentario> getAllChapterAssuntoComentario() {
         return chapterAssuntoComentarioRepository.findAll();
     }
@@ -28,7 +32,16 @@ public class ChapterAssuntoComentarioService {
        }
     }
 
-    public ChapterAssuntoComentario postChapterAssuntoComentario(ChapterAssuntoComentario chapterAssuntoComentario) {
+    public ChapterAssuntoComentario postChapterAssuntoComentario(ChapterAssuntoComentarioDto chapterAssuntoComentarioDto) {
+        ChapterAssuntoComentario chapterAssuntoComentario = new ChapterAssuntoComentario();
+        chapterAssuntoComentario.setTexto(chapterAssuntoComentarioDto.getTexto());
+        chapterAssuntoComentario.setData(chapterAssuntoComentarioDto.getData());
+        chapterAssuntoComentario.setChapterAssunto(chapterAssuntoService.getChapterAssuntoById(chapterAssuntoComentarioDto.getChapterAssuntoId()));
+        chapterAssuntoComentario.setUsuario(usuarioService.getUsuarioById(chapterAssuntoComentarioDto.getUsuarioId()));
+        chapterAssuntoComentario.setCurtidas(chapterAssuntoComentarioDto.getCurtidas());
+        if (chapterAssuntoComentarioDto.getPaiId() != null) {
+            chapterAssuntoComentario.setComentarioPai(getChapterAssuntoComentarioById(chapterAssuntoComentarioDto.getPaiId()));
+        }
         return chapterAssuntoComentarioRepository.save(chapterAssuntoComentario);
     }
 

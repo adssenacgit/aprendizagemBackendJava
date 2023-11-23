@@ -17,38 +17,20 @@ public class ChapterAssuntoService {
 
     private final ChapterAssuntoRepository chapterAssuntoRepository;
 
-    private final ChapterAssuntoComentarioService chapterAssuntoComentarioService;
 
     @Transactional
-    public ResponseEntity<List<ChapterAssunto>> getAllChapterAssunto() {
-        List<ChapterAssunto> assuntos = chapterAssuntoRepository.getAllChapterAssunto();
-        if (assuntos.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(assuntos);
-    }
-
-    @Transactional
-    public ResponseEntity<List<ChapterAssuntoDto>> getAllChapterAssuntoIgnoreComentarios() {
-        List<ChapterAssunto> chapterAssuntos = chapterAssuntoRepository.getAllChapterAssunto();
-        List<ChapterAssuntoDto> chapterAssuntoDtos = new ArrayList<>();
-        for (ChapterAssunto chapterAssunto : chapterAssuntos) {
-            ChapterAssuntoDto chapterAssuntoDTO = new ChapterAssuntoDto();
-            buildDto(chapterAssunto, chapterAssuntoDTO);
-            chapterAssuntoDtos.add(chapterAssuntoDTO);
-        }
-        return ResponseEntity.ok().body(chapterAssuntoDtos);
-    }
-
-
-    @Transactional
-    public ChapterAssuntoDto getChapterAssuntoById(Integer id) {
+    public ChapterAssuntoDto getChapterAssuntoDtoById(Integer id) {
         ChapterAssunto chapterAssunto = chapterAssuntoRepository.findById(id).orElse(null);
         ChapterAssuntoDto chapterAssuntoDTO = new ChapterAssuntoDto();
         if (chapterAssunto != null) {
             buildDto(chapterAssunto, chapterAssuntoDTO);
         }
         return chapterAssuntoDTO;
+    }
+
+    @Transactional
+    public ChapterAssunto getChapterAssuntoById(Integer id) {
+        return chapterAssuntoRepository.findById(id).orElse(null);
     }
 
 

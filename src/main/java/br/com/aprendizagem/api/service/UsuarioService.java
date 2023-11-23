@@ -37,6 +37,12 @@ public class UsuarioService {
 	}
 
 	@Transactional
+	public Usuario getUsuarioById(String id) {
+		return usuarioRepository.findById(id).orElse(null);
+
+	}
+
+	@Transactional
 	public ResponseEntity<List<UsuarioResponse>> listarUsuarios() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		if (usuarios.isEmpty()) {

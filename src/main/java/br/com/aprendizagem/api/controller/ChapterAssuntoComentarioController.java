@@ -40,7 +40,7 @@ public class ChapterAssuntoComentarioController {
     }
 
     @PostMapping
-    public ResponseEntity<ChapterAssuntoComentario> postChapterAssuntoComentario(@RequestBody ChapterAssuntoComentario chapterAssuntoComentario) {
+    public ResponseEntity<ChapterAssuntoComentario> postChapterAssuntoComentario(@RequestBody ChapterAssuntoComentarioDto chapterAssuntoComentario) {
         return ResponseEntity.ok().body(chapterAssuntoComentarioService.postChapterAssuntoComentario(chapterAssuntoComentario));
     }
 
