@@ -86,15 +86,3 @@ public class ChapterAssunto {
                 '}';
     }
 }
-//chapter_assunto_id
-//chapter_assunto_data_cadastro
-//chapter_assunto_titulo
-//chapter_assunto_descricao
-//chapter_assunto_imagem
-//chapter_assunto_contador_visualizacao
-//chapter_assunto_status
-//chapter_assunto_verificacao
-//chapter_id
-//usuario_id
-//usuario_id_verificacao
-//chapter_tag
