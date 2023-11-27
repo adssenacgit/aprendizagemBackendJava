@@ -5,6 +5,7 @@ import br.com.aprendizagem.api.repository.*;
 import br.com.aprendizagem.api.request.SituacaoAprendizagemRequest;
 import br.com.aprendizagem.api.response.SituacaoAprendizagemResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class SituacaoAprendizagemService {
     private final PlanejamentoUcRepository planejamentoUcRepository;
     private final GrauDificuldadeRepository grauDificuldadeRepository;
     private final BadgeRepository badgeRepository;
+
     @Transactional
     public ResponseEntity<List<SituacaoAprendizagemResponse>> getAllSituacoesAprendizagem() {
         List<SituacaoAprendizagem> situacoes = situacaoAprendizagemRepository.findAll();
@@ -73,5 +75,14 @@ public class SituacaoAprendizagemService {
         novaSituacao.setBadge(badge);
 
         return ResponseEntity.ok(situacaoAprendizagemRepository.save(novaSituacao));
+    }
+@Transactional
+    public ResponseEntity<SituacaoAprendizagem> updateSituacaoAprendizagem(Long id, SituacaoAprendizagem situacaoAprendizagem) {
+        SituacaoAprendizagem situacaoAprendizagemExistente = situacaoAprendizagemRepository.findById(id).orElse(null);
+        if(situacaoAprendizagemExistente != null) {
+            BeanUtils.copyProperties(situacaoAprendizagem, situacaoAprendizagemExistente);
+            return ResponseEntity.ok(situacaoAprendizagemRepository.save(situacaoAprendizagem));
+        }
+        return ResponseEntity.notFound().build();
     }
 }

@@ -40,5 +40,10 @@ public class SituacaoAprendizagemController {
     public ResponseEntity<SituacaoAprendizagem> createSituacaoAprendizagem(@RequestBody SituacaoAprendizagemRequest situacaoRequest) {
         return situacaoAprendizagemService.createSituacaoAprendizagem(situacaoRequest);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SituacaoAprendizagem> updateSituacaoAprendizagem(@PathVariable Long id,@RequestBody SituacaoAprendizagem situacaoAprendizagem) {
+        return situacaoAprendizagemService.updateSituacaoAprendizagem(id, situacaoAprendizagem);
+    }
 }
 

@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -42,6 +45,14 @@ public class ObjetoAprendizagem {
     @ManyToOne
     @JoinColumn(name ="grau_dificuldade_id")
     private GrauDificuldade grauDificuldade;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "objeto_aprendizagem_recurso",
+            joinColumns = @JoinColumn(name = "objeto_aprendizagem_id"),
+            inverseJoinColumns = @JoinColumn(name = "recurso_id")
+    )
+    private List<Recurso> recursos = new ArrayList<>();
 
 //    @ManyToOne
 //    @JoinColumn(name ="usuario_id")

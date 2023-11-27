@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.ObjetoAprendizagem;
+import br.com.aprendizagem.api.entity.Recurso;
 import br.com.aprendizagem.api.repository.ObjetoAprendizagemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ObjetoAprendizagemService {
 
     @Transactional
     public ResponseEntity<List<ObjetoAprendizagem>> getAllObjetosAprendizagem() {
-        List<ObjetoAprendizagem> objetos = objetoAprendizagemRepository.findAll();
+        List<ObjetoAprendizagem> objetos = objetoAprendizagemRepository.findAllWithRecursos();
         if (objetos.isEmpty()){
             return ResponseEntity.notFound().build();
         }
@@ -28,7 +29,16 @@ public class ObjetoAprendizagemService {
         return objetoAprendizagemRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public ObjetoAprendizagem getObjetoAprendizagemById(Long objetoAprendizagemId) {
         return objetoAprendizagemRepository.findById(objetoAprendizagemId).orElse(null);
+    }
+    @Transactional
+    public ResponseEntity<ObjetoAprendizagem> getObjetoWithRecursosByObjetoId(Long objetoId) {
+        ObjetoAprendizagem objetoAprendizagem = objetoAprendizagemRepository.findByIdWithRecursos(objetoId);
+        if (objetoAprendizagem != null) {
+            return ResponseEntity.ok(objetoAprendizagem);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

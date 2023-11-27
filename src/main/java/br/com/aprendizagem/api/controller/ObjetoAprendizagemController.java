@@ -42,4 +42,9 @@ public class ObjetoAprendizagemController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping(value = "obterObjetoComRecursosPorId/{objetoId}")
+    public ResponseEntity<ObjetoAprendizagem> getObjetoWithRecursosByObjetoId(@PathVariable Long objetoId){
+        return objetoAprendizagemService.getObjetoWithRecursosByObjetoId(objetoId);
+    }
 }

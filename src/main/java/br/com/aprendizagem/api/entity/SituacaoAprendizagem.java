@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,7 +65,7 @@ public class SituacaoAprendizagem {
     private Set<ObjetoAprendizagem> objetosAprendizagem = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "situacaoAprendizagem")
-    private List<Atividade> atividades;
+    private List<Atividade> atividades = new ArrayList<>();
 }
 
 
