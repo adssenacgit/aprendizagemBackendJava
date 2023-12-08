@@ -35,6 +35,11 @@ public class ChapterAssuntoController {
         }
     }
 
+    @GetMapping("/noticias")
+    public ResponseEntity<List<ChapterAssunto>> getAllNoticias() {
+        return ResponseEntity.ok(chapterAssuntoService.getAllNoticias());
+    }
+
     @GetMapping("/filtrar-chapter-assuntos-por-chapter-id/{chapterId}")
     public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId) {
         return chapterAssuntoService.filterChapterAssuntosByChapterId(chapterId);

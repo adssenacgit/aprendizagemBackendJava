@@ -33,6 +33,11 @@ public class ChapterAssuntoService {
         return chapterAssuntoRepository.findById(id).orElse(null);
     }
 
+    @Transactional
+    public List<ChapterAssunto> getAllNoticias() {
+        return chapterAssuntoRepository.getAllNoticias();
+    }
+
 
     @Transactional
     public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
