@@ -2,6 +2,7 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.ObjetoAprendizagem;
 import br.com.aprendizagem.api.entity.Recurso;
+import br.com.aprendizagem.api.entity.Usuario;
 import br.com.aprendizagem.api.repository.ObjetoAprendizagemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +41,9 @@ public class ObjetoAprendizagemService {
             return ResponseEntity.ok(objetoAprendizagem);
         }
         return ResponseEntity.notFound().build();
+    }
+    @Transactional
+    public ResponseEntity<ObjetoAprendizagem> createObjeto(ObjetoAprendizagem objeto) {
+        return ResponseEntity.ok(objetoAprendizagemRepository.save(objeto));
     }
 }

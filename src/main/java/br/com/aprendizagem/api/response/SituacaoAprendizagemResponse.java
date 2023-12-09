@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,9 @@ public class SituacaoAprendizagemResponse {
     private String titulo;
     private String descricao;
     private Integer ordem;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private Integer duracao;
     private Integer status;
     private PlanejamentoUc planejamentoUc;
     private GrauDificuldade grauDificuldade;
@@ -31,6 +36,9 @@ public class SituacaoAprendizagemResponse {
                 .titulo(situacaoAprendizagem.getTitulo())
                 .descricao(situacaoAprendizagem.getDescricao())
                 .ordem(situacaoAprendizagem.getOrdem())
+                .inicio(situacaoAprendizagem.getInicio())
+                .fim(situacaoAprendizagem.getFim())
+                .duracao(situacaoAprendizagem.getDuracao())
                 .status(situacaoAprendizagem.getStatus())
                 .planejamentoUc(situacaoAprendizagem.getPlanejamentoUc())
                 .grauDificuldade(situacaoAprendizagem.getGrauDificuldade())

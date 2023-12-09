@@ -22,6 +22,7 @@ import java.util.Set;
 public class ObjetoAprendizagem {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "objeto_aprendizagem_id")
     private Long id;
 
@@ -54,11 +55,11 @@ public class ObjetoAprendizagem {
     )
     private List<Recurso> recursos = new ArrayList<>();
 
-//    @ManyToOne
-//    @JoinColumn(name ="usuario_id")
-//    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name ="usuario_id")
+    private Usuario usuario;
 
 //    @JsonBackReference
 //    @ManyToMany(mappedBy = "objetosAprendizagem", fetch = FetchType.LAZY)
-//    private List<SituacaoAprendizagem> situacoesAprendizagem;
+//    private Set<SituacaoAprendizagem> situacoesAprendizagem = new HashSet<>();
 }
