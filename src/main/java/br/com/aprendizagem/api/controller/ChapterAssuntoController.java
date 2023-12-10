@@ -1,16 +1,13 @@
 package br.com.aprendizagem.api.controller;
 
+import br.com.aprendizagem.api.DTO.ChapterAssuntoDto;
 import br.com.aprendizagem.api.entity.ChapterAssunto;
-import br.com.aprendizagem.api.entity.ChapterTag;
 import br.com.aprendizagem.api.service.ChapterAssuntoService;
-import br.com.aprendizagem.api.service.ChapterTagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,19 +18,31 @@ public class ChapterAssuntoController {
 
     private final ChapterAssuntoService chapterAssuntoService;
 
-    @GetMapping
-    public ResponseEntity<List<ChapterAssunto>> getAllChapterAssunto() {
-        return chapterAssuntoService.getAllChapterAssunto();
+
+    @GetMapping()
+    public ResponseEntity<List<ChapterAssuntoDto>> getAllChapterAssunto() {
+        return chapterAssuntoService.getAllChapterAssuntoDto();
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<ChapterAssunto> getChapterAssuntoWithTags(@PathVariable Integer id) {
-        ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoWithTags(id);
-        if (chapterAssunto != null) {
-            return ResponseEntity.ok(chapterAssunto);
+    public ResponseEntity<ChapterAssuntoDto> getChapterAssuntoById(@PathVariable Integer id) {
+        ChapterAssuntoDto chapterAssuntoDTO = chapterAssuntoService.getChapterAssuntoDtoById(id);
+        if (chapterAssuntoDTO != null) {
+            return ResponseEntity.ok().body(chapterAssuntoDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/noticias")
+    public ResponseEntity<List<ChapterAssunto>> getAllNoticias() {
+        return ResponseEntity.ok(chapterAssuntoService.getAllNoticias());
+    }
+
+    @GetMapping("/filtrar-chapter-assuntos-por-chapter-id/{chapterId}")
+    public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId) {
+        return chapterAssuntoService.filterChapterAssuntosByChapterId(chapterId);
     }
 
     @PostMapping()
@@ -46,15 +55,5 @@ public class ChapterAssuntoController {
         }
     }
 
-    @PostMapping("{id}/associar-tags")
-    public ResponseEntity<Void> associarTagAAssunto(@PathVariable Integer id, @RequestBody List<Integer> tagIds) {
-        ChapterAssunto chapterAssunto = chapterAssuntoService.getChapterAssuntoWithTags(id);
-        if (chapterAssunto != null) {
-            chapterAssuntoService.associarTagAAssunto(chapterAssunto, tagIds);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
 
-    }
 }

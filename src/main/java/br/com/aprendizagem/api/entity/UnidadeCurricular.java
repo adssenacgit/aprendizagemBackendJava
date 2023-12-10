@@ -2,16 +2,7 @@ package br.com.aprendizagem.api.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -56,10 +47,9 @@ public class UnidadeCurricular {
 	@Column(name = "unidade_curricular_status", nullable = false)
 	private Integer status;	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "modulo_id", nullable = false)
-	@JsonIgnore
-	private Modulo modulo;	
+	private Modulo modulo;
 	
 	//@OneToMany(mappedBy = "competencia")
     //private Set<Competencia> competencia;

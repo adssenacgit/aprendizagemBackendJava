@@ -1,9 +1,6 @@
 package br.com.aprendizagem.api.response;
 
-import br.com.aprendizagem.api.entity.GrauDificuldade;
-import br.com.aprendizagem.api.entity.ObjetoAprendizagem;
-import br.com.aprendizagem.api.entity.SituacaoAprendizagem;
-import br.com.aprendizagem.api.entity.Usuario;
+import br.com.aprendizagem.api.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +25,7 @@ public class ObjetoAprendizagemResponse {
     private Integer ordem;
     private Integer status;
     private GrauDificuldade grauDificuldade;
+    private List<Recurso> recursos;
 
     public static ObjetoAprendizagemResponse of (ObjetoAprendizagem objetoAprendizagem){
         return ObjetoAprendizagemResponse.builder()

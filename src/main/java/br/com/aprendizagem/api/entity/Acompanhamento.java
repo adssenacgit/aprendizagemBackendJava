@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public class Acompanhamento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "acompanhamento_id")
     private Long id;
 

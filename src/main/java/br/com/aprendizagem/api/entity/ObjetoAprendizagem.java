@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,6 +22,7 @@ import java.util.List;
 public class ObjetoAprendizagem {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "objeto_aprendizagem_id")
     private Long id;
 
@@ -43,11 +47,19 @@ public class ObjetoAprendizagem {
     @JoinColumn(name ="grau_dificuldade_id")
     private GrauDificuldade grauDificuldade;
 
-//    @ManyToOne
-//    @JoinColumn(name ="usuario_id")
-//    private Usuario usuario;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "objeto_aprendizagem_recurso",
+            joinColumns = @JoinColumn(name = "objeto_aprendizagem_id"),
+            inverseJoinColumns = @JoinColumn(name = "recurso_id")
+    )
+    private List<Recurso> recursos = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name ="usuario_id")
+    private Usuario usuario;
 
 //    @JsonBackReference
 //    @ManyToMany(mappedBy = "objetosAprendizagem", fetch = FetchType.LAZY)
-//    private List<SituacaoAprendizagem> situacoesAprendizagem;
+//    private Set<SituacaoAprendizagem> situacoesAprendizagem = new HashSet<>();
 }

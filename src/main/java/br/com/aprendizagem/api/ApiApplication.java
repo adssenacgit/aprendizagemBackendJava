@@ -2,6 +2,7 @@ package br.com.aprendizagem.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableScheduling
 @EnableAsync
 @CrossOrigin(origins = "http://localhost:4200")
-public class ApiApplication {
+public class ApiApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);

@@ -1,9 +1,6 @@
 package br.com.aprendizagem.api.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,7 @@ import java.util.Set;
 public class SituacaoAprendizagem {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "situacao_aprendizagem_id")
     private Long id;
 
@@ -41,6 +39,9 @@ public class SituacaoAprendizagem {
 
     @Column(name = "situacao_aprendizagem_fim")
     private LocalDateTime fim;
+
+    @Column(name = "situacao_aprendizagem_duracao")
+    private Integer duracao;
 
     @Column(name = "situacao_aprendizagem_status")
     private Integer status;
@@ -64,8 +65,7 @@ public class SituacaoAprendizagem {
     private Set<ObjetoAprendizagem> objetosAprendizagem = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "situacaoAprendizagem")
-    private List<Atividade> atividades;
-
+    private List<Atividade> atividades = new ArrayList<>();
 }
 
 

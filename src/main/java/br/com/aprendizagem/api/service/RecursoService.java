@@ -31,12 +31,10 @@ public class RecursoService {
         }
         return ResponseEntity.ok(RecursoResponse.of(recursos));
     }
-
     @Transactional
     public Recurso getArquivoRecursoById(Long id) {
         return recursoRepository.findById(id).orElse(null);
     }
-
     @Transactional
     public ResponseEntity<Recurso> getRecursoById(Long id) {
         Recurso recurso = recursoRepository.findById(id).orElse(null);
@@ -44,7 +42,6 @@ public class RecursoService {
             return ResponseEntity.ok(recurso);
         return ResponseEntity.notFound().build();
     }
-
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getActiveRecursos() {
         List<Recurso> recursos = recursoRepository.getActiveRecursos();
@@ -53,7 +50,6 @@ public class RecursoService {
         }
         return ResponseEntity.ok(RecursoResponse.of(recursos));
     }
-
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getActiveRecursosSemArquivo() {
         List<RecursoResponse> recursos = recursoRepository.getActiveRecursosSemArquivo();
@@ -64,7 +60,6 @@ public class RecursoService {
 
         return ResponseEntity.ok(recursos);
     }
-
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getActiveRecursosByUsuarioIdSemArquivo(String usuarioId) {
 
@@ -74,7 +69,6 @@ public class RecursoService {
         }
         return ResponseEntity.ok(recursos);
     }
-
     @Transactional
     public ResponseEntity<List<RecursoResponse>> getPublicRecursosSemArquivo() {
         List<RecursoResponse> recursos = recursoRepository.getPublicRecursosSemArquivo();
@@ -85,7 +79,6 @@ public class RecursoService {
 
         return ResponseEntity.ok(recursos);
     }
-
     @Transactional
     public ResponseEntity<RecursoResponse> atualizarRecursoStatus(Long id, Integer status) {
         Optional<Recurso> optionalRecurso = recursoRepository.findById(id);
@@ -99,7 +92,6 @@ public class RecursoService {
             return ResponseEntity.notFound().build();
         }
     }
-
     @Transactional
     public ResponseEntity<Recurso> updateRecursoNomeById(Long id, String nomeAtualizado) {
         Optional<Recurso> optionalRecurso = recursoRepository.findById(id);
@@ -113,7 +105,6 @@ public class RecursoService {
             return ResponseEntity.notFound().build();
         }
     }
-
     @Transactional
     public ResponseEntity<Recurso> createRecurso(RecursoRequest recursoRequest) {
         Recurso recurso = new Recurso();

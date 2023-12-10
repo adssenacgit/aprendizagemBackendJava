@@ -2,23 +2,22 @@ package br.com.aprendizagem.api.service;
 
 import br.com.aprendizagem.api.entity.Encontro;
 import br.com.aprendizagem.api.repository.EncontroRepository;
-import br.com.aprendizagem.api.response.EncontroAlunoResponse;
+import br.com.aprendizagem.api.response.EncontroEstudanteResponse;
 import br.com.aprendizagem.api.response.EncontroResponse;
-import br.com.aprendizagem.api.response.EncontroSituacaoResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
 public class EncontroService {
 
-    public final EncontroRepository encontroRepository;
+    private final EncontroRepository encontroRepository;
     private final SituacaoAprendizagemService situacaoAprendizagemService;
+    private final ControleExecucaoService controleExecucaoService;
     @Transactional
     public ResponseEntity<List<Encontro>> getAllEncontros() {
         List<Encontro> encontros = encontroRepository.findAll();
@@ -38,8 +37,33 @@ public class EncontroService {
     }
 
     @Transactional
-    public ResponseEntity<List<EncontroAlunoResponse>> getEncontrosByGrupoIdByEstudanteId(Long grupoId, Long estudanteId) {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<List<EncontroEstudanteResponse>> getEncontrosByGrupoIdByEstudanteId(Long grupoId, Long estudanteId) {
+        List<Encontro> encontros = encontroRepository.findByGrupoId(grupoId).orElse(null);
+        if(encontros == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<EncontroEstudanteResponse> encontroEstudanteResponses = new ArrayList<>();
+        for(Encontro encontro: encontros){
+            Integer presenca = controleExecucaoService.getPresencaByEncontroIdByEstudanteId(encontro.getId(), estudanteId);
+            encontroEstudanteResponses.add(EncontroEstudanteResponse.of(encontro, presenca));
+        }
+        return ResponseEntity.ok(encontroEstudanteResponses);
+
+    }
+
+    @Transactional
+    public Map<String, Integer> getNumeroObjetosAtividadesByEncontroId(Long encontroId){
+        Integer totalAtividades = encontroRepository.countAtividadeByEncontroId(encontroId);
+        Integer totalObjetos = encontroRepository.countObjetoAprendizagemByEncontroId(encontroId);
+        Map<String, Integer> totalObjetosAtividades = new HashMap<>();
+        totalObjetosAtividades.put("totalAtividades", totalAtividades);
+        totalObjetosAtividades.put("totalObjetos", totalObjetos);
+        return totalObjetosAtividades;
+    }
+
+    @Transactional
+    public List<Encontro> getEncontrosListByGrupoId(Long grupoId){
+        return encontroRepository.findByGrupoId(grupoId).orElse(null);
     }
 
 //    @Transactional

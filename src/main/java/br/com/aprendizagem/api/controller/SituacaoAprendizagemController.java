@@ -1,18 +1,14 @@
 package br.com.aprendizagem.api.controller;
 
 import br.com.aprendizagem.api.entity.SituacaoAprendizagem;
-import br.com.aprendizagem.api.entity.SituacaoEncontro;
+import br.com.aprendizagem.api.request.SituacaoAprendizagemRequest;
 import br.com.aprendizagem.api.response.SituacaoAprendizagemResponse;
 import br.com.aprendizagem.api.service.SituacaoAprendizagemService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "situacao-aprendizagem")
@@ -33,6 +29,21 @@ public class SituacaoAprendizagemController {
     @GetMapping("filtrarSituacoesAprendizagemPorEncontroId/{encontroId}")
     public ResponseEntity<List<SituacaoAprendizagem>> getSituacoesAprendizagemByEncontroId(@PathVariable Long encontroId) {
         return situacaoAprendizagemService.getSituacoesAprendizagemByEncontroId(encontroId);
+    }
+
+    @GetMapping("filtrarSituacoesAprendizagemPorPlanejamentoUcId/{planejamentoUcId}")
+    public ResponseEntity<List<SituacaoAprendizagemResponse>> getSituacoesAprendizagemByPlanejamentoUcId(@PathVariable Long planejamentoUcId) {
+        return situacaoAprendizagemService.getSituacoesAprendizagemByPlanejamentoUcId(planejamentoUcId);
+    }
+
+    @PostMapping
+    public ResponseEntity<SituacaoAprendizagem> createSituacaoAprendizagem(@RequestBody SituacaoAprendizagemRequest situacaoRequest) {
+        return situacaoAprendizagemService.createSituacaoAprendizagem(situacaoRequest);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SituacaoAprendizagem> updateSituacaoAprendizagem(@PathVariable Long id,@RequestBody SituacaoAprendizagem situacaoAprendizagem) {
+        return situacaoAprendizagemService.updateSituacaoAprendizagem(id, situacaoAprendizagem);
     }
 }
 

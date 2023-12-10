@@ -1,6 +1,8 @@
 package br.com.aprendizagem.api.response;
 
+import br.com.aprendizagem.api.entity.Estudante;
 import br.com.aprendizagem.api.entity.Participante;
+import br.com.aprendizagem.api.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class ParticipanteResponse {
     private Integer status;
     private Long grupoId;
     private String usuarioId;
+    private Estudante estudante;
 
 
     public static ParticipanteResponse of(Participante participante){
@@ -29,6 +32,7 @@ public class ParticipanteResponse {
                 .status(participante.getStatus())
                 .grupoId(participante.getGrupo().getId())
                 .usuarioId(participante.getEstudante().getUsuario().getId())
+                .estudante(participante.getEstudante())
                 .build();
     }
 

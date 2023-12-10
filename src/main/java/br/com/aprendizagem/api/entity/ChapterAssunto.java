@@ -1,15 +1,14 @@
 package br.com.aprendizagem.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -63,17 +62,27 @@ public class ChapterAssunto {
             inverseJoinColumns = @JoinColumn(name = "chapter_tag_id"))
     private Set<ChapterTag> tags = new HashSet<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "chapterAssunto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<ChapterAssuntoComentario> comentarios = new HashSet<>();
 
+
+    @Override
+    public String toString() {
+        return "ChapterAssunto{" +
+                "id=" + id +
+                ", dataCadastro=" + dataCadastro +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", imagem=" + Arrays.toString(imagem) +
+                ", contadorVisualizacao=" + contadorVisualizacao +
+                ", status=" + status +
+                ", verificacao=" + verificacao +
+                ", chapter=" + chapter +
+                ", usuario=" + usuario +
+                ", usuarioVerificacao=" + usuarioVerificacao +
+                ", tags=" + tags +
+                ", comentarios=" + comentarios +
+                '}';
+    }
 }
-//chapter_assunto_id
-//chapter_assunto_data_cadastro
-//chapter_assunto_titulo
-//chapter_assunto_descricao
-//chapter_assunto_imagem
-//chapter_assunto_contador_visualizacao
-//chapter_assunto_status
-//chapter_assunto_verificacao
-//chapter_id
-//usuario_id
-//usuario_id_verificacao
-//chapter_tag
